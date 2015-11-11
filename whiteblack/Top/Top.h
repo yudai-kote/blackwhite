@@ -35,7 +35,7 @@ enum class SCENE
 enum class BLOCK
 {
     NORMAL_ = 1,
-    WHITE = 2,
+    WHITE_ = 2,
     BLACK_ =3,
     MOVE_=4,
     FALL_=5,

@@ -21,8 +21,10 @@ public:
 
     Vec2f Collision(Object _player ,
         BLOCK _up, BLOCK _down,
-        DIRECTION _direction,
-        int move_vector);
+        DIRECTION _direction = DIRECTION::NON,
+        int move_vector = 0);
+    BLOCK getBlockStatus();
+
 
 private:
     BLOCK status;
