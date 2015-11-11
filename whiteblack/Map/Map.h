@@ -1,3 +1,4 @@
+
 #include "../Top/Top.h"
 #include "../Block/Block.h"
 /////ウッティーーー
@@ -18,7 +19,6 @@
 
 
 
-
 class Map
 {
 public:
@@ -27,7 +27,13 @@ public:
     void draw();
     void setup();
 
+	Vec2f isHitPlayerToBlock(Object, CONDITION);
+	void selected(Vec2i);
+	void sucked(Vec2i);
+
 private:
+
+	std::vector<std::vector<Block>> map_chip;
     
 };
 
