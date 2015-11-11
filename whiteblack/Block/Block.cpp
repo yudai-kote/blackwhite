@@ -47,8 +47,8 @@ void Block::setStatus(BLOCK _status){
 //âΩÉ}ÉXìÆÇ©Ç∑ÇÃÇ©ÅH
 Vec2f Block::Collision(Object _player, 
     BLOCK _up, BLOCK _down,
-    DIRECTION _direction = DIRECTION::NON,
-    int move_vector = 0){
+    DIRECTION _direction,
+    int move_vector ){
 
 
 
