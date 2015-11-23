@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../lib/framework.hpp"
+#include "../../../lib/framework.hpp"
 #include <iostream>
 #include <fstream>
 #include <sstream>
