@@ -7,11 +7,12 @@ Block::Block(){
 }
 
 void Block::update(){
-    switch (status)
+    
+    switch (static_cast<int>(status))
     {
-    case BLOCK::FALL_:
+    case static_cast<int>(BLOCK::BLACK_) :
         break;
-    case BLOCK::MOVE_:
+    case static_cast<int>(BLOCK::FALL_BLACK_) :
         break;
     default:
 
@@ -52,11 +53,11 @@ Vec2f Block::Collision(Object _player,
 
 
 
-    switch (status)
+    switch (static_cast<int>(status))
     {
-    case BLOCK::FALL_:
+    case static_cast<int>(BLOCK::BLACK_):
         break;
-    case BLOCK::MOVE_:
+    case static_cast<int>(BLOCK::FALL_BLACK_):
         break;
     default:
         break;
