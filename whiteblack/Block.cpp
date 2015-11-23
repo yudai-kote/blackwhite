@@ -3,23 +3,22 @@
 
 Block::Block(){
     setup();
-	type = static_cast<int>(BLOCK::NULLBLOCK);
+	type = BLOCK::BLACK_;
 }
 
 void Block::update(){
-    
-    switch (static_cast<int>(status))
+    switch (status)
     {
-    case static_cast<int>(BLOCK::BLACK_) :
+    case BLOCK::FALL_:
         break;
-    case static_cast<int>(BLOCK::FALL_BLACK_) :
+    case BLOCK::MOVE_:
         break;
     default:
 
 
         break;
     }
-
+	
 	if (env.isPushButton(Mouse::LEFT))
 	{
 		type = (type + 1) % 8;
@@ -31,40 +30,40 @@ void Block::draw(){
 
 	switch (type)
 	{
-	case static_cast<int>(BLOCK::NULLBLOCK) :
+	case BLOCK::NULLBLOCK:
 		break;
 
-	case static_cast<int>(BLOCK::NORMAL_) :
+	case BLOCK::NORMAL_:
 		drawFillBox(start_pos.x(), start_pos.y(), draw_pos.x(), draw_pos.y(), Color::white);
 		break;
 
-	case static_cast<int>(BLOCK::WHITE) :
+	case BLOCK::WHITE:
 		drawFillBox(start_pos.x(), start_pos.y(), draw_pos.x(), draw_pos.y(), Color::black);
 		break;
 
-	case static_cast<int>(BLOCK::BLACK_) :
+	case BLOCK::BLACK_:
 		drawFillBox(start_pos.x(), start_pos.y(), draw_pos.x(), draw_pos.y(), Color::blue);
 		break;
 
-	case static_cast<int>(BLOCK::MOVE_) :
+	case BLOCK::MOVE_:
 		drawFillBox(start_pos.x(), start_pos.y(), draw_pos.x(), draw_pos.y(), Color::cyan);
 		break;
 
-	case static_cast<int>(BLOCK::FALL_) :
+	case BLOCK::FALL_:
 		drawFillBox(start_pos.x(), start_pos.y(), draw_pos.x(), draw_pos.y(), Color::gray);
 		break;
 
-	case static_cast<int>(BLOCK::DOUBLE_W) :
+	case BLOCK::DOUBLE_W:
 		drawFillBox(start_pos.x(), start_pos.y(), draw_pos.x(), draw_pos.y(), Color::green);
 		break;
 
-	case static_cast<int>(BLOCK::DOUBLE_B) :
+	case BLOCK::DOUBLE_B:
 		drawFillBox(start_pos.x(), start_pos.y(), draw_pos.x(), draw_pos.y(), Color::lime);
 		break;
 	}
-
-
-
+	
+		
+	
 
 }
 
@@ -90,16 +89,16 @@ void Block::setStatus(BLOCK _status){
 //âΩÉ}ÉXìÆÇ©Ç∑ÇÃÇ©ÅH
 Vec2f Block::Collision(Object _player, 
     BLOCK _up, BLOCK _down,
-    DIRECTION _direction,
-    int move_vector ){
+    DIRECTION _direction = DIRECTION::NON,
+    int move_vector = 0){
 
 
 
-    switch (static_cast<int>(status))
+    switch (status)
     {
-    case static_cast<int>(BLOCK::BLACK_):
+    case BLOCK::FALL_:
         break;
-    case static_cast<int>(BLOCK::FALL_BLACK_):
+    case BLOCK::MOVE_:
         break;
     default:
         break;
