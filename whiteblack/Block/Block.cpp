@@ -3,25 +3,68 @@
 
 Block::Block(){
     setup();
-    
+	type = static_cast<int>(BLOCK::NULLBLOCK);
 }
 
 void Block::update(){
-    switch (status)
+    
+    switch (static_cast<int>(status))
     {
-    case BLOCK::FALL_:
+    case static_cast<int>(BLOCK::BLACK_) :
         break;
-    case BLOCK::MOVE_:
+    case static_cast<int>(BLOCK::FALL_BLACK_) :
         break;
     default:
 
 
         break;
     }
+
+	if (env.isPushButton(Mouse::LEFT))
+	{
+		type = (type + 1) % 8;
+	}
     
 }
 
 void Block::draw(){
+
+	switch (type)
+	{
+	case static_cast<int>(BLOCK::NULLBLOCK) :
+		break;
+
+	case static_cast<int>(BLOCK::NORMAL_) :
+		drawFillBox(start_pos.x(), start_pos.y(), draw_pos.x(), draw_pos.y(), Color::white);
+		break;
+
+	case static_cast<int>(BLOCK::WHITE) :
+		drawFillBox(start_pos.x(), start_pos.y(), draw_pos.x(), draw_pos.y(), Color::black);
+		break;
+
+	case static_cast<int>(BLOCK::BLACK_) :
+		drawFillBox(start_pos.x(), start_pos.y(), draw_pos.x(), draw_pos.y(), Color::blue);
+		break;
+
+	case static_cast<int>(BLOCK::MOVE_) :
+		drawFillBox(start_pos.x(), start_pos.y(), draw_pos.x(), draw_pos.y(), Color::cyan);
+		break;
+
+	case static_cast<int>(BLOCK::FALL_) :
+		drawFillBox(start_pos.x(), start_pos.y(), draw_pos.x(), draw_pos.y(), Color::gray);
+		break;
+
+	case static_cast<int>(BLOCK::DOUBLE_W) :
+		drawFillBox(start_pos.x(), start_pos.y(), draw_pos.x(), draw_pos.y(), Color::green);
+		break;
+
+	case static_cast<int>(BLOCK::DOUBLE_B) :
+		drawFillBox(start_pos.x(), start_pos.y(), draw_pos.x(), draw_pos.y(), Color::lime);
+		break;
+	}
+
+
+
 
 }
 
@@ -52,11 +95,11 @@ Vec2f Block::Collision(Object _player,
 
 
 
-    switch (status)
+    switch (static_cast<int>(status))
     {
-    case BLOCK::FALL_:
+    case static_cast<int>(BLOCK::BLACK_):
         break;
-    case BLOCK::MOVE_:
+    case static_cast<int>(BLOCK::FALL_BLACK_):
         break;
     default:
         break;
