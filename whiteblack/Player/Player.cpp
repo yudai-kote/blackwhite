@@ -92,12 +92,14 @@ bool Player::releaseColor(bool active){
 		if (color_abs >= 0){
 			if (env.isPushKey('L')){
 				color_abs--;
+				return true;
 			}
 		}
 	}
 	if (env.isPushKey('I')){
 		color_abs = 0;
 	}
+	return false;
 }
 
 Vec2f Player::getPos(){
