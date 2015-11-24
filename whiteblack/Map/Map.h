@@ -36,7 +36,7 @@ public:
 	bool sucked(Vec2i);
 	//選択されているマップチップの座標を
 	//引数で獲得して放出します
-	bool release(Vec2i);
+	bool released(Vec2i);
 
 private:
 

@@ -23,7 +23,7 @@ void Map::draw(){
 					static_cast<float>(BLOCKSIZE::WIDTH),
 					static_cast<float>(BLOCKSIZE::HEIGTH),
 					Color::gray);
-				return;
+				break;
 
 			case BLOCK::WHITE_:
 				drawFillBox(x * static_cast<float>(BLOCKSIZE::WIDTH),
@@ -133,6 +133,8 @@ Vec2f Map::isHitPlayerToBlock(Object player, CONDITION condition){
 			return sinking;
 		}
 	}
+
+	return Vec2f(0.0f, 0.0f);
 }
 
 void Map::selected(Vec2i selected_pos){
@@ -151,7 +153,7 @@ bool Map::sucked(Vec2i selected_pos){
 	switch (map_chip[selected_pos.y()][selected_pos.x()].getBlockStatus())
 	{
 	case BLOCK::NORMAL_:
-		return;
+		return false;
 
 	case BLOCK::WHITE_:
 		return false;
@@ -181,14 +183,16 @@ bool Map::sucked(Vec2i selected_pos){
 		map_chip[selected_pos.y()][selected_pos.x()].setStatus(BLOCK::WHITE_);
 		return true;
 	}
+
+	return false;
 }
 
-bool Map::release(Vec2i selected_pos)
+bool Map::released(Vec2i selected_pos)
 {
 	switch (map_chip[selected_pos.y()][selected_pos.x()].getBlockStatus())
 	{
 	case BLOCK::NORMAL_:
-		return;
+		return false;
 
 	case BLOCK::WHITE_:
 		map_chip[selected_pos.y()][selected_pos.x()].setStatus(BLOCK::BLACK_);
@@ -218,6 +222,8 @@ bool Map::release(Vec2i selected_pos)
 	case BLOCK::DOUBLE_BLACK_:
 		return false;
 	}
+
+	return false;
 }
 
 void Map::mapDelete()
