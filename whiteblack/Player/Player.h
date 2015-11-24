@@ -25,9 +25,25 @@ public:
     Player();
     void update();
     void draw();
-    void setup();
+    void setup(Vec2f pos);
+	void move();
+	//ブロックがアクティブなら選択ボタンを押せる
+	//そして吸ったかどうかを返す
+	bool mapAbs(bool active);
+	bool releaseColor(bool active);
+
+	//ゲッター
+	Vec2f getPos();
+	Vec2i getSelec();
+	CONDITION getCond();
 private:
     
     Object player;
-    
+	Vec2i selection;
+	Vec2f speed;
+	float g;
+	int color_abs;
+	int change_count;
+	CONDITION condition;
+	DIRECTION direction;
 };
