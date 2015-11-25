@@ -11,13 +11,13 @@ void Player::update(){
 
 void Player::draw(){
 	drawFillBox(player.pos.x(), player.pos.y(), player.size.x(), player.size.y(),
-		Color::white, 0, Vec2f(0, 0), Vec2f(player.size.x() / 2, 0));
+		Color::white, 0, Vec2f(1, 1), Vec2f(player.size.x() / 2, 0));
 }
 
 void Player::setup(Vec2f pos){
 	player.pos = pos;
 	player.size = Vec2f(140, 190);
-	speed = Vec2f(0.5, 10);
+	speed = Vec2f(0.4, 50);
 	player.vec = Vec2f(0, 0);
 	selection = Vec2i(0,0);
 	color_abs = 0;
@@ -47,37 +47,47 @@ void Player::move(){
 		}
 	}
 	//ˆÚ“®
-	if (env.isPushKey('Z')){
+	if (env.isPressKey('Z')){
 		player.vec.x() += speed.x();
 		player.pos.x() -= player.vec.x();
-		if (player.vec.x() > 5){
-			player.vec.x() = 5;
+		if (player.vec.x() > 8){
+			player.vec.x() = 8;
 		}
+		direction = DIRECTION::LEFT;
 	}
-	else {
-		player.vec.x() = 0;
-	}
-	if (env.isPushKey('C')){
+	
+	if (env.isPressKey('C')){
 		player.vec.x() += speed.x();
 		player.pos.x() += player.vec.x();
-		if (player.vec.x() > 5){
-			player.vec.x() = 5;
+		if (player.vec.x() > 8){
+			player.vec.x() = 8;
 		}
+		direction = DIRECTION::RIGHT;
 	}
-	else {
+	
+	
+	if (direction == DIRECTION::LEFT){
+		player.pos.x() -= player.vec.x();
+	}
+	if (direction == DIRECTION::RIGHT){
+		player.pos.x() += player.vec.x();
+	}
+	if (player.vec.x() > 0){
+		player.vec.x() -= 0.2;
+	}
+	else{
 		player.vec.x() = 0;
 	}
 	//ƒWƒƒƒ“ƒv
 	if (env.isPushKey('K')){
 		player.vec.y() = speed.y();
-		player.pos.y() += player.vec.y();
-		player.vec.y() -= g;
 	}
-	
+	player.pos.y() += player.vec.y();
+	player.vec.y() -= g;
 	
 }
 
-bool Player::mapAbs(bool active){
+bool Player::absColor(bool active){
 
 	if (active == true){
 		if (env.isPushKey('J')){
