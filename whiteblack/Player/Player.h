@@ -25,9 +25,29 @@ public:
     Player();
     void update();
     void draw();
-    void setup();
+    void setup(Vec2f pos);
+	void move();
+	//ブロックが吸える状態なら選択ボタンを押せる
+	//そして吸ったかどうかを返す
+	bool absColor(bool active);
+	bool releaseColor(bool active);
+
+	//ゲッター
+	Vec2f getPos();
+	Vec2i getSelec();
+	CONDITION getCond();
+
+	//セッター
+	//ポスのセットは地面判定でやってあげてね
+	void setPos(Vec2f pos);
 private:
     
     Object player;
-    
+	Vec2i selection;
+	Vec2f speed;
+	float g;
+	int color_abs;
+	int change_count;
+	CONDITION condition;
+	DIRECTION direction;
 };

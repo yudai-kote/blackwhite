@@ -35,12 +35,17 @@ enum class SCENE
 enum class BLOCK
 {
     NORMAL_ = 1,
-    WHITE = 2,
-    BLACK_ =3,
-    MOVE_=4,
-    FALL_=5,
-    DOUBLE_W = 6,
-    DOUBLE_B = 7,
+    WHITE_ ,
+    BLACK_ ,
+
+    MOVE_WHITE_,
+    MOVE_BLACK_,
+
+    FALL_WHITE_,
+    FALL_BLACK_,
+
+    DOUBLE_WHITE_,
+    DOUBLE_BLACK_,
 
 };
 //ÉvÉåÉCÉÑÅ[ÇÃèÛë‘
