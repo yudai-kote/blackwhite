@@ -1,12 +1,12 @@
 #pragma once
-#include "BlockBase.h"
+#include "../BlockBase.h"
 
-class DoubleBlock : public BlockBase
+class FallBlock : public BlockBase
 {
 public:
 
-	DoubleBlock();
-	~DoubleBlock();
+	FallBlock();
+	~FallBlock();
 
 	void update();
 	void draw();
