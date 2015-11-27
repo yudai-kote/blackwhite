@@ -18,7 +18,9 @@ public:
 	void setPos(Vec2f _pos){ block.pos = _pos; }
 	void setStatus(BLOCK _block){ status = _block; }
 	void setCondition(CONDITION _type){ color_type = _type; }
+
 	BLOCK getBlockStatus(){ return status; }
+	CONDITION getCondition(){ return color_type; }
 
 private:
 

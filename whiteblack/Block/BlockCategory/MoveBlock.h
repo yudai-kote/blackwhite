@@ -1,5 +1,5 @@
 #pragma once
-#include "BlockBase.h"
+#include "../BlockBase.h"
 
 class MoveBlock : public BlockBase
 {
