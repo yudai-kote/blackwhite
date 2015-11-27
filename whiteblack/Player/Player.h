@@ -27,15 +27,19 @@ public:
     void draw();
     void setup(Vec2f pos);
 	void move();
-	//ブロックがアクティブなら選択ボタンを押せる
+	//ブロックが吸える状態なら選択ボタンを押せる
 	//そして吸ったかどうかを返す
-	bool mapAbs(bool active);
+	bool absColor(bool active);
 	bool releaseColor(bool active);
 
 	//ゲッター
 	Vec2f getPos();
 	Vec2i getSelec();
 	CONDITION getCond();
+
+	//セッター
+	//ポスのセットは地面判定でやってあげてね
+	void setPos(Vec2f pos);
 private:
     
     Object player;
