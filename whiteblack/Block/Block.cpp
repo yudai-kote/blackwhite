@@ -3,7 +3,7 @@
 
 Block::Block(){
     setup();
-	type = static_cast<int>(BLOCK::NULL_);
+	type = static_cast<int>(BLOCK::NULLBLOCK);
 }
 
 void Block::update(){
@@ -30,7 +30,7 @@ void Block::draw(){
 
 	switch (type)
 	{
-	case static_cast<int>(BLOCK::NULL_) :
+	case static_cast<int>(BLOCK::NULLBLOCK) :
 		break;
 
 	case static_cast<int>(BLOCK::NORMAL_) :
