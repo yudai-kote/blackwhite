@@ -11,6 +11,7 @@
 class Block 
 {
 public:
+
     Block();
     void update();
     void draw();
@@ -19,7 +20,6 @@ public:
     void setPos(Vec2f _pos);
     void setStatus(BLOCK _block);
 
-	int type;
 	Vec2f start_pos = Vec2f(0, 0);
 	Vec2f draw_pos = Vec2f(200, 200);
 
@@ -27,8 +27,8 @@ public:
         BLOCK _up, BLOCK _down,
         DIRECTION _direction = DIRECTION::NON,
         int move_vector = 0);
-    BLOCK getBlockStatus();
 
+    BLOCK getBlockStatus();
 
 private:
     BLOCK status;

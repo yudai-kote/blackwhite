@@ -10,12 +10,27 @@ void Block::update(){
 
 	switch (status)
 	{
-	case BLOCK::FALL_BLACK_:
+	case BLOCK::NORMAL:
+		
+		
+		
 		break;
-	case BLOCK::MOVE_WHITE_:
+	case BLOCK::MOVE:
+		
+		
+		
+		break;
+	case BLOCK::FALL:
+		
+		
+		
+		break;
+	case BLOCK::DOUBLE:
+		
+		
+		
 		break;
 	default:
-
 
 		break;
 	}
