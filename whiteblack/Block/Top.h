@@ -36,17 +36,12 @@ enum class BLOCK
 {
 	NULLBLOCK = 0,
     NORMAL_ = 1,
-    WHITE_ ,
-    BLACK_ ,
-
-    MOVE_WHITE_,
-    MOVE_BLACK_,
-
-    FALL_WHITE_,
-    FALL_BLACK_,
-
-    DOUBLE_WHITE_,
-    DOUBLE_BLACK_,
+    WHITE = 2,
+    BLACK_ =3,
+    MOVE_=4,
+    FALL_=5,
+    DOUBLE_W = 6,
+    DOUBLE_B = 7,
 
 };
 //ÉvÉåÉCÉÑÅ[ÇÃèÛë‘
