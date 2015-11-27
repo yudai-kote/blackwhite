@@ -34,25 +34,18 @@ enum class SCENE
 //ブロックの種類
 enum class BLOCK
 {
-	NULLBLOCK = 0,
-    NORMAL_ = 1,
-    WHITE_ ,
-    BLACK_ ,
-
-    MOVE_WHITE_,
-    MOVE_BLACK_,
-
-    FALL_WHITE_,
-    FALL_BLACK_,
-
-    DOUBLE_WHITE_,
-    DOUBLE_BLACK_,
+    NORMAL = 1,
+    
+    MOVE,
+    FALL,
+    DOUBLE,
 
 };
 //プレイヤーの状態
 enum class CONDITION{
     BLACK,
-    WHITE
+    WHITE,
+    NONE
 };
 
 
