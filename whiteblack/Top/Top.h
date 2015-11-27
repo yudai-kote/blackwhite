@@ -34,6 +34,7 @@ enum class SCENE
 //ƒuƒƒbƒN‚Ìí—Ş
 enum class BLOCK
 {
+	NULL_ = 0,
     NORMAL_ = 1,
     WHITE = 2,
     BLACK_ =3,
