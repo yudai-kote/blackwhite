@@ -14,8 +14,8 @@ public:
     Map();
     void update();
     void draw();
-	//プレイするstageの番号とstageのmap_chipの数を引数にください
-    void setup(int, Vec2i);
+	//プレイするstageの番号を引数にください
+    void setup(int);
 
 	Vec2f getPlayerStartPos() const;
 

@@ -20,13 +20,17 @@ void Map::draw(){
 	}
 }
 
-void Map::setup(int stage, Vec2i map_size){
+void Map::setup(int stage){
 
 	std::string file_name = "res/stage" + std::to_string(stage) + ".txt";
 	std::ifstream* map_file = new std::ifstream(file_name);
 
+	Vec2i map_size;
 	int type;
 	std::vector<BlockBase*> map_chip_;
+
+	*map_file >> map_size.x();
+	*map_file >> map_size.y();
 
 	for (int y = 0; y < map_size.y(); y++)
 	{
