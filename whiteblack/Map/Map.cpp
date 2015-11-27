@@ -118,7 +118,7 @@ void Map::setup(int stage, Vec2i map_size){
 	{
 		for (int x = 0; x < map_size.y(); y++)
 		{
-			map_chip[y][x].setPos(static_cast<float>(BLOCKSIZE::WIDTH)*x, -(static_cast<float>(BLOCKSIZE::HEIGTH)*y));
+			map_chip[y][x].setPos(Vec2f(static_cast<float>(BLOCKSIZE::WIDTH)*x, -(static_cast<float>(BLOCKSIZE::HEIGTH)*y)));
 		}
 	}
 }
