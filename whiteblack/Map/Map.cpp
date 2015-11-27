@@ -113,6 +113,14 @@ void Map::setup(int stage, Vec2i map_size){
 	}
 
 	delete map_file;
+
+	for (int y = 0; y < map_size.y(); y++)
+	{
+		for (int x = 0; x < map_size.y(); y++)
+		{
+			map_chip[y][x].setPos(static_cast<float>(BLOCKSIZE::WIDTH)*x, -(static_cast<float>(BLOCKSIZE::HEIGTH)*y));
+		}
+	}
 }
 
 Vec2f Map::isHitPlayerToBlock(Object player, CONDITION condition){
