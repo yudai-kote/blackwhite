@@ -40,6 +40,8 @@ enum class BLOCK
     FALL,
     DOUBLE,
 
+    PLAYER_START_POS
+
 };
 //ƒvƒŒƒCƒ„[‚Ìó‘Ô
 enum class CONDITION{
