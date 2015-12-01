@@ -2,7 +2,7 @@
 
 
 Map::Map(){
-	setup(1, Vec2i(10, 10));
+	setup(1);
 }
 
 void Map::update(){
