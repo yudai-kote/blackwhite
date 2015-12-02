@@ -1,7 +1,7 @@
 #include "SceneManager.h"
 
 SceneManager::SceneManager(){
-    scene_number = SCENE::TITLE;
+    scene_number = SCENE::GAME;
 }
 
 void SceneManager::update(){
