@@ -18,6 +18,21 @@ void MoveBlock::setup()
 	block.vec = Vec2f::Zero();
 }
 
+Vec2f MoveBlock::getBlockPos()
+{
+	return Vec2f();
+}
+
+Vec2f MoveBlock::getBlockSize()
+{
+	return Vec2f();
+}
+
+Vec2f MoveBlock::getBlockVectol()
+{
+	return Vec2f();
+}
+
 void MoveBlock::update()
 {
 

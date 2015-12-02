@@ -18,6 +18,21 @@ void NormalBlock::setup()
 	block.vec = Vec2f::Zero();
 }
 
+Vec2f NormalBlock::getBlockPos()
+{
+	return Vec2f();
+}
+
+Vec2f NormalBlock::getBlockSize()
+{
+	return Vec2f();
+}
+
+Vec2f NormalBlock::getBlockVectol()
+{
+	return Vec2f();
+}
+
 void NormalBlock::update()
 {
 

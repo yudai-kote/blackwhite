@@ -18,9 +18,9 @@ public:
 	void setStatus(BLOCK _block){ status = _block; }
 	void setCondition(CONDITION _type){ color_type = _type; }
 
-	Vec2f getBlockPos(){ return block.pos; }
-	Vec2f getBlockSize(){ return block.size; }
-	Vec2f getBlockVectol(){ return block.vec; }
+	virtual Vec2f getBlockPos() = 0;
+	virtual Vec2f getBlockSize() = 0;
+	virtual Vec2f getBlockVectol() = 0;
 
 	BLOCK getBlockStatus(){ return status; }
 	CONDITION getCondition(){ return color_type; }
