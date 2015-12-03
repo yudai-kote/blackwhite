@@ -18,11 +18,11 @@ public:
 	void setStatus(BLOCK _block){ status = _block; }
 	void setCondition(CONDITION _type){ color_type = _type; }
 
-	Vec2f getBlockPos(){ return block.pos; }
-	Vec2f getBlockSize(){ return block.size; }
-	Vec2f getBlockVectol(){ return block.vec; }
+	Vec2f getPos() { return block.pos; }
+	Vec2f getSize() { return block.size; }
+	Vec2f getVectol() { return block.vec; }
 
-	BLOCK getBlockStatus(){ return status; }
+	BLOCK getStatus(){ return status; }
 	CONDITION getCondition(){ return color_type; }
 
 protected:
@@ -30,4 +30,5 @@ protected:
 	CONDITION color_type;
 	BLOCK status;
 	Object block;
+
 };
