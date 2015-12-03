@@ -18,21 +18,6 @@ void FallBlock::setup()
 	block.vec = Vec2f::Zero();
 }
 
-Vec2f FallBlock::getBlockPos()
-{
-	return Vec2f();
-}
-
-Vec2f FallBlock::getBlockSize()
-{
-	return Vec2f();
-}
-
-Vec2f FallBlock::getBlockVectol()
-{
-	return Vec2f();
-}
-
 void FallBlock::update()
 {
 

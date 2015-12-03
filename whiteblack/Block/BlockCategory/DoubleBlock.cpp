@@ -18,21 +18,6 @@ void DoubleBlock::setup()
 	block.vec = Vec2f::Zero();
 }
 
-Vec2f DoubleBlock::getBlockPos()
-{
-	return Vec2f();
-}
-
-Vec2f DoubleBlock::getBlockSize()
-{
-	return Vec2f();
-}
-
-Vec2f DoubleBlock::getBlockVectol()
-{
-	return Vec2f();
-}
-
 void DoubleBlock::update()
 {
 
