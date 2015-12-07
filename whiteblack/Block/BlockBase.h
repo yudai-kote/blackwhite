@@ -18,6 +18,8 @@ public:
 	void setStatus(BLOCK _block){ status = _block; }
 	void setCondition(CONDITION _type){ color_type = _type; }
 
+	virtual void setFallFlag(bool);
+
 	Vec2f getPos() { return block.pos; }
 	Vec2f getSize() { return block.size; }
 	Vec2f getVectol() { return block.vec; }
