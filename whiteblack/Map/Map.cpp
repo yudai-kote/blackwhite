@@ -185,7 +185,7 @@ void Map::selected(Vec2i selected_pos){
 
 bool Map::sucked(Vec2i selected_pos){
 
-	switch (map_chip[selected_pos.y()][selected_pos.x()]->getBlockStatus())
+	switch (map_chip[selected_pos.y()][selected_pos.x()]->getStatus())
 	{
 	case BLOCK::NORMAL:
 		if (map_chip[selected_pos.y()][selected_pos.x()]->getCondition() != CONDITION::BLACK)
@@ -219,7 +219,7 @@ bool Map::sucked(Vec2i selected_pos){
 
 bool Map::released(Vec2i selected_pos)
 {
-	switch (map_chip[selected_pos.y()][selected_pos.x()]->getBlockStatus())
+	switch (map_chip[selected_pos.y()][selected_pos.x()]->getStatus())
 	{
 	case BLOCK::NORMAL:
 		if (map_chip[selected_pos.y()][selected_pos.x()]->getCondition() != CONDITION::WHITE)
