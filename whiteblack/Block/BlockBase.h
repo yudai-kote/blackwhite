@@ -8,9 +8,9 @@ public:
 	BlockBase(){};
 	virtual ~BlockBase(){};
 
-	virtual void update() = 0;
-	virtual void draw() = 0;
-	virtual void setup() = 0;
+    virtual void update(){};
+    virtual void draw(){};
+    virtual void setup(){};
 
 	void setImage(Texture image){ this->image = image; }
 	void setPos(Vec2f _pos){ block.pos = _pos; }

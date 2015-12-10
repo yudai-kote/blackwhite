@@ -16,6 +16,7 @@ void Map::draw(){
 		for (int x = 0; x < static_cast<int>(map_chip[y].size()); x++)
 		{
 			map_chip[y][x]->draw();
+
 		}
 	}
 }
@@ -29,20 +30,27 @@ void Map::setup(int stage){
 
 	Vec2i map_size;
 
-	*map_file >> map_size.x();
 	*map_file >> map_size.y();
+	*map_file >> map_size.x();
+
 
 	std::vector<BlockBase*> map_chip_;
 	int type;
-
+    int c = 0;
 	for (int y = 0; y < map_size.y(); y++)
-	{
-		for (int x = 0; x < map_size.y(); x++)
+    {
+        std::cout << std::endl;
+		for (int x = 0; x < map_size.x(); x++)
 		{
+            c++;
 			*map_file >> type;
-
+            
 			switch (type)
 			{
+            case 0:
+                map_chip_.push_back(new BlockBase);
+                break;
+
 			case 1:
 				map_chip_.push_back(new NormalBlock);
 				//map_chip_[x]->setImage(Texture("res/Texture/normal_block.png"));
@@ -106,6 +114,7 @@ void Map::setup(int stage){
 				player_start_pos = Vec2f(
 					static_cast<float>(BLOCKSIZE::WIDTH)*x,
 					-(static_cast<float>(BLOCKSIZE::HEIGTH)*y));
+                map_chip_.push_back(new BlockBase);
 				continue;
 
 			case 11:
@@ -160,6 +169,9 @@ void Map::setup(int stage){
 
 		map_chip_.clear();
 	}
+
+    
+   
 
 	delete map_file;
 }
