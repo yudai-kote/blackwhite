@@ -64,7 +64,13 @@ void Map::setup(int stage){
 				player_start_pos = Vec2f(
 					static_cast<float>(BLOCKSIZE::WIDTH)*x,
 					-(static_cast<float>(BLOCKSIZE::HEIGTH)*y));
+
+				continue;
 			}
+
+			map_chip[y][x]->setPos(Vec2f(
+				static_cast<float>(BLOCKSIZE::WIDTH)*x,
+				-(static_cast<float>(BLOCKSIZE::HEIGTH)*y)));
 		}
 
 		map_chip.push_back(map_chip_);
@@ -73,6 +79,14 @@ void Map::setup(int stage){
 	}
 
 	delete map_file;
+
+	for (int y = 0; y < map_size.y(); y++)
+	{
+		for (int x = 0; x < map_size.x(); x++)
+		{
+			
+		}
+	}
 
 }
 
