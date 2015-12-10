@@ -40,7 +40,7 @@ enum class BLOCK
     FALL,
     DOUBLE,
 
-    PLAYER_START_POS
+    PLAYER_START_POS =10
 
 };
 //ƒvƒŒƒCƒ„[‚Ìó‘Ô

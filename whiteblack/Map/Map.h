@@ -1,10 +1,10 @@
 
 #include "../Top/Top.h"
 #include "../Block/BlockBase.h"
-#include "../Block/NormalBlock.h"
-#include "../Block/MoveBlock.h"
-#include "../Block/FallBlock.h"
-#include "../Block/DoubleBlock.h"
+#include "../Block/BlockCategory/NormalBlock.h"
+#include "../Block/BlockCategory/MoveBlock.h"
+#include "../Block/BlockCategory/FallBlock.h"
+#include "../Block/BlockCategory/DoubleBlock.h"
 
 
 

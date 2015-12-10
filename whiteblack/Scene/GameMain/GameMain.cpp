@@ -4,23 +4,33 @@
 
 
 GameMain::GameMain(){
-    setup();
+    //setup();
 }
 void GameMain::update(){
-    
+    player.update();
+    map.update();
+
+
 }
 void GameMain::draw(){
+
     glPushMatrix();
-    glTranslated(player.getPos().x(), player.getPos.y(),0);
-
-
+    glTranslated(player.getPos().x(), player.getPos().y(),0);
+    
+    
+    std::cout << player.getPos() << std::endl;
     player.draw();
     map.draw();
     glPopMatrix();
-
 }
+
 void GameMain::setup(){
-    
+    map.setup(1);
+
+
+    player.setup(map.getPlayerStartPos());
+    //player.setPos(map.getPlayerStartPos());
+
 
 }
 
