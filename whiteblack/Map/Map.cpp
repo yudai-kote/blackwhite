@@ -25,16 +25,24 @@ void Map::setup(int stage){
 	std::string file_name = "res/stage" + std::to_string(stage) + ".txt";
 	std::ifstream* map_file = new std::ifstream(file_name);
 
+	if (map_file->fail())
+	{
+		std::cerr << "“Ç‚Ýž‚ÝŽ¸”s" << std::endl;
+
+		exit(0);
+	}
+
 	Vec2i map_size;
-	int type;
-	std::vector<BlockBase*> map_chip_;
 
 	*map_file >> map_size.x();
 	*map_file >> map_size.y();
 
+	std::vector<BlockBase*> map_chip_;
+	int type;
+
 	for (int y = 0; y < map_size.y(); y++)
 	{
-		for (int x = 0; x < map_size.y(); y++)
+		for (int x = 0; x < map_size.y(); x++)
 		{
 			*map_file >> type;
 
