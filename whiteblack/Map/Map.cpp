@@ -46,25 +46,26 @@ void Map::setup(int stage){
 		{
 			*map_file >> type;
 
-			switch (static_cast<BLOCK>(type))
+			switch (type)
 			{
-			case BLOCK::NORMAL:
+			case 1:
 				map_chip_.push_back(new NormalBlock);
 				break;
 
-			case BLOCK::MOVE:
+			case 2:
 				map_chip_.push_back(new MoveBlock);
 				break;
 
-			case BLOCK::FALL:
+			case 3:
 				map_chip_.push_back(new FallBlock);
+				map_chip_[y][x].setFallFlag(false);
 				break;
 
-			case BLOCK::DOUBLE:
+			case 4:
 				map_chip_.push_back(new DoubleBlock);
 				break;
 
-			case BLOCK::PLAYER_START_POS:
+			case 5:
 				player_start_pos = Vec2f(
 					static_cast<float>(BLOCKSIZE::WIDTH)*x,
 					-(static_cast<float>(BLOCKSIZE::HEIGTH)*y));
@@ -78,13 +79,6 @@ void Map::setup(int stage){
 
 	delete map_file;
 
-	for (int y = 0; y < map_size.y(); y++)
-	{
-		for (int x = 0; x < map_size.y(); y++)
-		{
-			map_chip[y][x]->setPos(Vec2f(static_cast<float>(BLOCKSIZE::WIDTH)*x, -(static_cast<float>(BLOCKSIZE::HEIGTH)*y)));
-		}
-	}
 }
 
 Vec2f Map::getPlayerStartPos() const{
