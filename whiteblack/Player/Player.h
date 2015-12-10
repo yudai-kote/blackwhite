@@ -17,6 +17,11 @@
 //プレイヤーの初期位置はマップからもらってくる予定だ
 //
 
+enum class SELECTDIR{
+	Y,
+	X,
+	NON
+};
 
 
 class Player
@@ -27,10 +32,13 @@ public:
     void draw();
     void setup(Vec2f pos);
 	void move();
+	void dirUpdate(SELECTDIR&);
+	void animation();
+	SELECTDIR select_dir;
 	//ブロックが吸える状態なら選択ボタンを押せる
 	//そして吸ったかどうかを返す
-	bool absColor(bool active);
-	bool releaseColor(bool active);
+	bool suckOutColor(CONDITION cond);
+	
 
 	//ゲッター
 	Vec2f getPos();
@@ -41,7 +49,10 @@ public:
 	//ポスのセットは地面判定でやってあげてね
 	void setPos(Vec2f pos);
 private:
-    
+	Texture player_texture;
+	int ColorMax ;
+	int animation_count;
+	float cut_x;
     Object player;
 	Vec2i selection;
 	Vec2f speed;
