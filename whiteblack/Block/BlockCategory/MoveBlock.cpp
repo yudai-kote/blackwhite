@@ -16,16 +16,11 @@ void MoveBlock::setup()
 						(float)BLOCKSIZE::WIDTH);
 	
 	block.vec = Vec2f::Zero();
-
-	move_flag = false;
 }
 
 void MoveBlock::update()
 {
-	if (move_flag == true)
-	{
-		block.pos += block.vec;
-	}
+
 }
 
 void MoveBlock::draw()

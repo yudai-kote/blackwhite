@@ -2,7 +2,7 @@
 
 
 Map::Map(){
-	setup(1);
+	setup(1, Vec2i(10, 10));
 }
 
 void Map::update(){
@@ -22,55 +22,45 @@ void Map::draw(){
 
 void Map::setup(int stage){
 
-	std::string file_name = "res/map/stage" + std::to_string(stage) + ".txt";
+	std::string file_name = "res/stage" + std::to_string(stage) + ".txt";
 	std::ifstream* map_file = new std::ifstream(file_name);
 
-	assert(map_file->fail());
-
 	Vec2i map_size;
+	int type;
+	std::vector<BlockBase*> map_chip_;
 
 	*map_file >> map_size.x();
 	*map_file >> map_size.y();
 
-	std::vector<BlockBase*> map_chip_;
-	int type;
-
 	for (int y = 0; y < map_size.y(); y++)
 	{
-		for (int x = 0; x < map_size.y(); x++)
+		for (int x = 0; x < map_size.y(); y++)
 		{
 			*map_file >> type;
 
-			switch (type)
+			switch (static_cast<BLOCK>(type))
 			{
-			case 1:
+			case BLOCK::NORMAL:
 				map_chip_.push_back(new NormalBlock);
 				break;
 
-			case 2:
+			case BLOCK::MOVE:
 				map_chip_.push_back(new MoveBlock);
 				break;
 
-			case 3:
+			case BLOCK::FALL:
 				map_chip_.push_back(new FallBlock);
-				map_chip_[y][x].setFallFlag(false);
 				break;
 
-			case 4:
+			case BLOCK::DOUBLE:
 				map_chip_.push_back(new DoubleBlock);
 				break;
 
-			case 5:
+			case BLOCK::PLAYER_START_POS:
 				player_start_pos = Vec2f(
 					static_cast<float>(BLOCKSIZE::WIDTH)*x,
 					-(static_cast<float>(BLOCKSIZE::HEIGTH)*y));
-
-				continue;
 			}
-
-			map_chip[y][x]->setPos(Vec2f(
-				static_cast<float>(BLOCKSIZE::WIDTH)*x,
-				-(static_cast<float>(BLOCKSIZE::HEIGTH)*y)));
 		}
 
 		map_chip.push_back(map_chip_);
@@ -82,12 +72,11 @@ void Map::setup(int stage){
 
 	for (int y = 0; y < map_size.y(); y++)
 	{
-		for (int x = 0; x < map_size.x(); x++)
+		for (int x = 0; x < map_size.y(); y++)
 		{
-			
+			map_chip[y][x]->setPos(Vec2f(static_cast<float>(BLOCKSIZE::WIDTH)*x, -(static_cast<float>(BLOCKSIZE::HEIGTH)*y)));
 		}
 	}
-
 }
 
 Vec2f Map::getPlayerStartPos() const{
@@ -196,7 +185,7 @@ void Map::selected(Vec2i selected_pos){
 
 bool Map::sucked(Vec2i selected_pos){
 
-	switch (map_chip[selected_pos.y()][selected_pos.x()]->getStatus())
+	switch (map_chip[selected_pos.y()][selected_pos.x()]->getBlockStatus())
 	{
 	case BLOCK::NORMAL:
 		if (map_chip[selected_pos.y()][selected_pos.x()]->getCondition() != CONDITION::BLACK)
@@ -230,7 +219,7 @@ bool Map::sucked(Vec2i selected_pos){
 
 bool Map::released(Vec2i selected_pos)
 {
-	switch (map_chip[selected_pos.y()][selected_pos.x()]->getStatus())
+	switch (map_chip[selected_pos.y()][selected_pos.x()]->getBlockStatus())
 	{
 	case BLOCK::NORMAL:
 		if (map_chip[selected_pos.y()][selected_pos.x()]->getCondition() != CONDITION::WHITE)
