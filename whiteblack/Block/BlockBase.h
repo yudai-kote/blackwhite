@@ -12,6 +12,7 @@ public:
 	virtual void draw() = 0;
 	virtual void setup() = 0;
 
+	void setImage(Texture image){ this->image = image; }
 	void setPos(Vec2f _pos){ block.pos = _pos; }
 	void setVec(Vec2f _vec){ block.vec = _vec; }
 	void setStatus(BLOCK _block){ status = _block; }
@@ -31,5 +32,6 @@ protected:
 	CONDITION color_type;
 	BLOCK status;
 	Object block;
+	Texture image;
 
 };

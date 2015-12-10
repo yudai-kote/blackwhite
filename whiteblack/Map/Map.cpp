@@ -25,7 +25,7 @@ void Map::setup(int stage){
 	std::string file_name = "res/map/stage" + std::to_string(stage) + ".txt";
 	std::ifstream* map_file = new std::ifstream(file_name);
 
-	assert(map_file->fail());
+	assert(!map_file->fail());
 
 	Vec2i map_size;
 
@@ -45,6 +45,7 @@ void Map::setup(int stage){
 			{
 			case 1:
 				map_chip_.push_back(new NormalBlock);
+				
 				break;
 
 			case 2:
@@ -79,15 +80,6 @@ void Map::setup(int stage){
 	}
 
 	delete map_file;
-
-	for (int y = 0; y < map_size.y(); y++)
-	{
-		for (int x = 0; x < map_size.x(); x++)
-		{
-			
-		}
-	}
-
 }
 
 Vec2f Map::getPlayerStartPos() const{
