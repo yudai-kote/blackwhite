@@ -45,31 +45,113 @@ void Map::setup(int stage){
 			{
 			case 1:
 				map_chip_.push_back(new NormalBlock);
-				
+				//map_chip_[x]->setImage(Texture("res/Texture/normal_block.png"));
+				map_chip_[x]->setCondition(CONDITION::NONE);
 				break;
 
 			case 2:
 				map_chip_.push_back(new MoveBlock);
+				//map_chip_[x]->setImage(Texture("res/Texture/move_right_white_block.png"));
+				map_chip_[x]->setCondition(CONDITION::WHITE);
+				map_chip_[x]->setVec(Vec2f(-10.0f, 0.0f));
 				break;
 
 			case 3:
 				map_chip_.push_back(new FallBlock);
-				map_chip_[y][x].setFallFlag(false);
+				//map_chip_[x]->setImage(Texture("res/Texture/fall_white_block.png"));
+				map_chip_[x]->setCondition(CONDITION::WHITE);
+				map_chip_[x]->setVec(Vec2f(0.0f, -10.0f));
+				map_chip_[x]->setFallFlag(false);
 				break;
 
 			case 4:
 				map_chip_.push_back(new DoubleBlock);
+				//map_chip_[x]->setImage(Texture("res/Texture/double_white_block.png"));
+				map_chip_[x]->setCondition(CONDITION::WHITE);
 				break;
 
 			case 5:
+				map_chip_.push_back(new NormalBlock);
+				//map_chip_[x]->setImage(Texture("res/Texture/white_block.png"));
+				map_chip_[x]->setCondition(CONDITION::WHITE);
+				break;
+
+			case 6:
+				map_chip_.push_back(new MoveBlock);
+				//map_chip_[x]->setImage(Texture("res/Texture/move_right_black_block.png"));
+				map_chip_[x]->setCondition(CONDITION::BLACK);
+				map_chip_[x]->setVec(Vec2f(-10.0f, 0.0f));
+				break;
+
+			case 7:
+				map_chip_.push_back(new FallBlock);
+				//map_chip_[x]->setImage(Texture("res/Texture/fall_black_block.png"));
+				map_chip_[x]->setCondition(CONDITION::BLACK);
+				map_chip_[x]->setVec(Vec2f(0.0f, -10.0f));
+				break;
+
+			case 8:
+				map_chip_.push_back(new DoubleBlock);
+				//map_chip_[x]->setImage(Texture("res/Texture/double_black_block.png"));
+				map_chip_[x]->setCondition(CONDITION::BLACK);
+				break;
+
+			case 9:
+				map_chip_.push_back(new NormalBlock);
+				//map_chip_[x]->setImage(Texture("res/Texture/normal_black_block.png"));
+				map_chip_[x]->setCondition(CONDITION::BLACK);
+				break;
+
+			case 10:
 				player_start_pos = Vec2f(
 					static_cast<float>(BLOCKSIZE::WIDTH)*x,
 					-(static_cast<float>(BLOCKSIZE::HEIGTH)*y));
-
 				continue;
+
+			case 11:
+				map_chip_.push_back(new MoveBlock);
+				//map_chip_[x]->setImage(Texture("res/Texture/move_down_white_block.png"));
+				map_chip_[x]->setCondition(CONDITION::WHITE);
+				map_chip_[x]->setVec(Vec2f(0.0f, -10.0f));
+				break;
+
+			case 12:
+				map_chip_.push_back(new MoveBlock);
+				//map_chip_[x]->setImage(Texture("res/Texture/move_left_white_block.png"));
+				map_chip_[x]->setCondition(CONDITION::WHITE);
+				map_chip_[x]->setVec(Vec2f(10.0f, 0.0f));
+				break;
+
+			case 13:
+				map_chip_.push_back(new MoveBlock);
+				//map_chip_[x]->setImage(Texture("res/Texture/move_up_white_block.png"));
+				map_chip_[x]->setCondition(CONDITION::WHITE);
+				map_chip_[x]->setVec(Vec2f(0.0f, 10.0f));
+				break;
+
+			case 14:
+				map_chip_.push_back(new MoveBlock);
+				//map_chip_[x]->setImage(Texture("res/Texture/move_down_black_block.png"));
+				map_chip_[x]->setCondition(CONDITION::BLACK);
+				map_chip_[x]->setVec(Vec2f(0.0f, -10.0f));
+				break;
+
+			case 15:
+				map_chip_.push_back(new MoveBlock);
+				//map_chip_[x]->setImage(Texture("res/Texture/move_left_black_block.png"));
+				map_chip_[x]->setCondition(CONDITION::BLACK);
+				map_chip_[x]->setVec(Vec2f(-10.0f, 0.0f));
+				break;
+
+			case 16:
+				map_chip_.push_back(new MoveBlock);
+				//map_chip_[x]->setImage(Texture("res/Texture/move_up_black_block.png"));
+				map_chip_[x]->setCondition(CONDITION::BLACK);
+				map_chip_[x]->setVec(Vec2f(0.0f, 10.0f));
+				break;
 			}
 
-			map_chip[y][x]->setPos(Vec2f(
+			map_chip_[x]->setPos(Vec2f(
 				static_cast<float>(BLOCKSIZE::WIDTH)*x,
 				-(static_cast<float>(BLOCKSIZE::HEIGTH)*y)));
 		}
