@@ -11,21 +11,12 @@ void Player::update(){
 }
 
 void Player::draw(){
-	drawFillBox(
-		player.pos.x(),
-		player.pos.y(),
-		player.size.x(),
-		player.size.y(),
-		Color::white,
-		0,
-		Vec2f(1, 1),
-		Vec2f(player.size.x() / 2, 0)
-		);
+	
 	if (direction == DIRECTION::LEFT){
 
 		drawTextureBox(
-			player.pos.x(),
-			player.pos.y(),
+			0,
+			0,
 			player.size.x(),
 			player.size.y(),
 			0+cut_x,
@@ -41,8 +32,8 @@ void Player::draw(){
 	if (direction == DIRECTION::RIGHT){
 
 		drawTextureBox(
-			player.pos.x(),
-			player.pos.y(),
+			0,
+			0,
 			player.size.x(),
 			player.size.y(),
 			0+cut_x,
