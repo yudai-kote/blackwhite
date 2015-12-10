@@ -15,12 +15,17 @@ void FallBlock::setup()
 	block.size = Vec2f((float)BLOCKSIZE::HEIGTH,
 		(float)BLOCKSIZE::WIDTH);
 
-	block.vec = Vec2f::Zero();
+	block.vec = Vec2f(0.0f, -10.0f);
+
+	fall_flag = false;
 }
 
 void FallBlock::update()
 {
-
+	if (fall_flag == true)
+	{
+		block.pos.y() += block.vec.y();
+	}
 }
 
 void FallBlock::draw()
