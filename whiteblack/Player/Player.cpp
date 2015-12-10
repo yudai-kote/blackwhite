@@ -59,7 +59,7 @@ void Player::setup(Vec2f pos){
 
 	speed = Vec2f(0.4, 50);
 	player.vec = Vec2f(0, 0);
-	g = 0;
+	g = 2;
 
 	selection = Vec2i(0,0);
 	direction = DIRECTION::RIGHT;
