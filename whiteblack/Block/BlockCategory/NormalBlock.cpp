@@ -12,8 +12,8 @@ NormalBlock::~NormalBlock()
 
 void NormalBlock::setup()
 {
-	block.size = Vec2f((float)BLOCKSIZE::HEIGTH,
-		(float)BLOCKSIZE::WIDTH);
+	block.size = Vec2f(static_cast<float>(BLOCKSIZE::WIDTH),
+		static_cast<float>(BLOCKSIZE::HEIGTH));
 
 	block.vec = Vec2f::Zero();
 }
