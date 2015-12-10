@@ -14,6 +14,6 @@ public:
 
 private:
 
-
+	bool fall_flag;
 
 };
