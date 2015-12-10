@@ -25,12 +25,7 @@ void Map::setup(int stage){
 	std::string file_name = "res/map/stage" + std::to_string(stage) + ".txt";
 	std::ifstream* map_file = new std::ifstream(file_name);
 
-	if (map_file->fail())
-	{
-		std::cerr << "“Ç‚İ‚İ¸”s" << std::endl;
-
-		exit(0);
-	}
+	assert(map_file->fail());
 
 	Vec2i map_size;
 
