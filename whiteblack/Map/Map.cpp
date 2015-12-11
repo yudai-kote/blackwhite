@@ -113,7 +113,7 @@ void Map::setup(int stage){
 			case 10:
 				player_start_pos = Vec2f(
 					static_cast<float>(BLOCKSIZE::WIDTH)*x,
-					-(static_cast<float>(BLOCKSIZE::HEIGTH)*y));
+					-(static_cast<float>(BLOCKSIZE::HEIGHT)*y));
                 map_chip_.push_back(new BlockBase);
 				continue;
 
@@ -162,7 +162,7 @@ void Map::setup(int stage){
 
 			map_chip_[x]->setPos(Vec2f(
 				static_cast<float>(BLOCKSIZE::WIDTH)*x,
-				-(static_cast<float>(BLOCKSIZE::HEIGTH)*y)));
+				-(static_cast<float>(BLOCKSIZE::HEIGHT)*y)));
 		}
 
 		map_chip.push_back(map_chip_);
@@ -273,9 +273,9 @@ Vec2f Map::isHitPlayerToBlock(Object player, CONDITION player_condition){
 void Map::selected(Vec2i selected_pos){
 
 	drawBox(selected_pos.x() * static_cast<float>(BLOCKSIZE::WIDTH),
-		-selected_pos.y() * static_cast<float>(BLOCKSIZE::HEIGTH),
+		-selected_pos.y() * static_cast<float>(BLOCKSIZE::HEIGHT),
 		static_cast<float>(BLOCKSIZE::WIDTH),
-		static_cast<float>(BLOCKSIZE::HEIGTH),
+		static_cast<float>(BLOCKSIZE::HEIGHT),
 		10,
 		Color::yellow);
 }
