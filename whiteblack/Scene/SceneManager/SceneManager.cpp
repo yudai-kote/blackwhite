@@ -2,6 +2,7 @@
 
 SceneManager::SceneManager(){
     scene_number = SCENE::GAME;
+    GameMain.setup();
 }
 
 void SceneManager::update(){

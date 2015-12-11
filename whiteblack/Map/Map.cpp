@@ -16,6 +16,7 @@ void Map::draw(){
 		for (int x = 0; x < static_cast<int>(map_chip[y].size()); x++)
 		{
 			map_chip[y][x]->draw();
+
 		}
 	}
 }
@@ -29,20 +30,27 @@ void Map::setup(int stage){
 
 	Vec2i map_size;
 
-	*map_file >> map_size.x();
 	*map_file >> map_size.y();
+	*map_file >> map_size.x();
+
 
 	std::vector<BlockBase*> map_chip_;
 	int type;
-
+    int c = 0;
 	for (int y = 0; y < map_size.y(); y++)
-	{
-		for (int x = 0; x < map_size.y(); x++)
+    {
+        std::cout << std::endl;
+		for (int x = 0; x < map_size.x(); x++)
 		{
+            c++;
 			*map_file >> type;
-
+            
 			switch (type)
 			{
+            case 0:
+                map_chip_.push_back(new BlockBase);
+                break;
+
 			case 1:
 				map_chip_.push_back(new NormalBlock);
 				//map_chip_[x]->setImage(Texture("res/Texture/normal_block.png"));
@@ -105,7 +113,8 @@ void Map::setup(int stage){
 			case 10:
 				player_start_pos = Vec2f(
 					static_cast<float>(BLOCKSIZE::WIDTH)*x,
-					-(static_cast<float>(BLOCKSIZE::HEIGTH)*y));
+					-(static_cast<float>(BLOCKSIZE::HEIGHT)*y));
+                map_chip_.push_back(new BlockBase);
 				continue;
 
 			case 11:
@@ -153,13 +162,16 @@ void Map::setup(int stage){
 
 			map_chip_[x]->setPos(Vec2f(
 				static_cast<float>(BLOCKSIZE::WIDTH)*x,
-				-(static_cast<float>(BLOCKSIZE::HEIGTH)*y)));
+				-(static_cast<float>(BLOCKSIZE::HEIGHT)*y)));
 		}
 
 		map_chip.push_back(map_chip_);
 
 		map_chip_.clear();
 	}
+
+    
+   
 
 	delete map_file;
 }
@@ -180,7 +192,7 @@ Vec2f Map::isHitPlayerToBlock(Object player, CONDITION player_condition){
 				return Vec2f(0.0f, 0.0f);
 
 			//top
-			if (map_chip[y][x]->getCondition() != map_chip[y - 1][x]->getCondition())
+			if (map_chip[y][x]->getCondition() != map_chip[y - (1*(y!=0))][x]->getCondition())
 			{
 				if (player.pos.x() + player.size.x() > map_chip[y][x]->getPos().x() &&
 					player.pos.x() < map_chip[y][x]->getPos().x() + map_chip[y][x]->getSize().x())
@@ -200,7 +212,7 @@ Vec2f Map::isHitPlayerToBlock(Object player, CONDITION player_condition){
 			}
 
 			//left
-			if (map_chip[y][x]->getCondition() != map_chip[y][x - 1]->getCondition())
+			if (map_chip[y][x]->getCondition() != map_chip[y][x - (1*(x!=0))]->getCondition())
 			{
 				if (player.pos.x() + player.size.x() > map_chip[y][x]->getPos().x() &&
 					player.pos.x() + player.size.x() < map_chip[y][x]->getPos().x() + map_chip[y][x]->getSize().x() / 2)
@@ -215,9 +227,9 @@ Vec2f Map::isHitPlayerToBlock(Object player, CONDITION player_condition){
 					}
 				}
 			}
-
+            
 			//right
-			if (map_chip[y][x]->getCondition() != map_chip[y][x + 1]->getCondition())
+			if (map_chip[y][x]->getCondition() != map_chip[y][x + (1*(map_chip[y].size() != x))]->getCondition())
 			{
 				if (player.pos.x() > map_chip[y][x]->getPos().x() + map_chip[y][x]->getSize().x() / 2 &&
 					player.pos.x() < map_chip[y][x]->getPos().x() + map_chip[y][x]->getSize().x())
@@ -234,7 +246,7 @@ Vec2f Map::isHitPlayerToBlock(Object player, CONDITION player_condition){
 			}
 
 			//down
-			if (map_chip[y][x]->getCondition() != map_chip[y + 1][x]->getCondition())
+			if (map_chip[y][x]->getCondition() != map_chip[y + (1*(map_chip.size() != y))][x]->getCondition())
 			{
 				if (player.pos.x() + player.size.x() > map_chip[y][x]->getPos().x() &&
 					player.pos.x() < map_chip[y][x]->getPos().x() + map_chip[y][x]->getSize().x())
@@ -252,6 +264,7 @@ Vec2f Map::isHitPlayerToBlock(Object player, CONDITION player_condition){
 					}
 				}
 			}
+            
 		}
 	}
 
@@ -261,9 +274,9 @@ Vec2f Map::isHitPlayerToBlock(Object player, CONDITION player_condition){
 void Map::selected(Vec2i selected_pos){
 
 	drawBox(selected_pos.x() * static_cast<float>(BLOCKSIZE::WIDTH),
-		-selected_pos.y() * static_cast<float>(BLOCKSIZE::HEIGTH),
+		-selected_pos.y() * static_cast<float>(BLOCKSIZE::HEIGHT),
 		static_cast<float>(BLOCKSIZE::WIDTH),
-		static_cast<float>(BLOCKSIZE::HEIGTH),
+		static_cast<float>(BLOCKSIZE::HEIGHT),
 		10,
 		Color::yellow);
 }

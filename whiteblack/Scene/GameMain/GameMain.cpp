@@ -4,27 +4,29 @@
 
 
 GameMain::GameMain(){
-    setup();
+    //setup();
 }
 void GameMain::update(){
     player.update();
     map.update();
+    player.addPos(map.isHitPlayerToBlock(player.getObject(),player.getCondition()));
 
-
+    std::cout << player.getObject().vec << std::endl;
 }
 void GameMain::draw(){
-
+    env.bgColor(Color::blue);
     glPushMatrix();
-    glTranslated(player.getPos().x(), player.getPos().y(),0);
-    std::cout << player.getPos() << std::endl;
-    player.draw();
+    glTranslated(-player.getObject().pos.x(), -player.getObject().pos.y(),0);
     map.draw();
+    map.selected(player.getSelect());
     glPopMatrix();
 
+    player.draw();
 }
+
 void GameMain::setup(){
     map.setup(1);
-    std::cout << map.getPlayerStartPos() << std::endl;
+
 
     player.setup(map.getPlayerStartPos());
     //player.setPos(map.getPlayerStartPos());
