@@ -9,16 +9,16 @@ GameMain::GameMain(){
 void GameMain::update(){
     player.update();
     map.update();
-    //player.setPos(player.getPos() + map.isHitPlayerToBlock(player.ge));
+    player.addPos(map.isHitPlayerToBlock(player.getObject(),player.getCondition()));
 
-
+    std::cout << player.getObject().vec << std::endl;
 }
 void GameMain::draw(){
     env.bgColor(Color::blue);
     glPushMatrix();
-    glTranslated(-player.getPos().x(), -player.getPos().y(),0);
+    glTranslated(-player.getObject().pos.x(), -player.getObject().pos.y(),0);
     map.draw();
-    map.selected(player.getSelec());
+    map.selected(player.getSelect());
     glPopMatrix();
 
     player.draw();
