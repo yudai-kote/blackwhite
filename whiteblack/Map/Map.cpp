@@ -36,25 +36,26 @@ void Map::setup(int stage){
 
 	std::vector<BlockBase*> map_chip_;
 	int type;
-    int c = 0;
+	int c = 0;
 	for (int y = 0; y < map_size.y(); y++)
-    {
-        std::cout << std::endl;
+	{
+		std::cout << std::endl;
 		for (int x = 0; x < map_size.x(); x++)
 		{
-            c++;
+			c++;
 			*map_file >> type;
-            
+
 			switch (type)
 			{
-            case 0:
-                map_chip_.push_back(new BlockBase);
-                break;
+			case 0:
+				map_chip_.push_back(new BlockBase);
+				map_chip_[x]->setCondition(CONDITION::NONE);
+				break;
 
 			case 1:
 				map_chip_.push_back(new NormalBlock);
 				//map_chip_[x]->setImage(Texture("res/Texture/normal_block.png"));
-				map_chip_[x]->setCondition(CONDITION::NONE);
+				map_chip_[x]->setCondition(CONDITION::STRIPE);
 				break;
 
 			case 2:
@@ -69,7 +70,6 @@ void Map::setup(int stage){
 				//map_chip_[x]->setImage(Texture("res/Texture/fall_white_block.png"));
 				map_chip_[x]->setCondition(CONDITION::WHITE);
 				map_chip_[x]->setVec(Vec2f(0.0f, -10.0f));
-				map_chip_[x]->setFallFlag(false);
 				break;
 
 			case 4:
@@ -111,10 +111,10 @@ void Map::setup(int stage){
 				break;
 
 			case 10:
+				map_chip_.push_back(new BlockBase);
 				player_start_pos = Vec2f(
 					static_cast<float>(BLOCKSIZE::WIDTH)*x,
 					-(static_cast<float>(BLOCKSIZE::HEIGHT)*y));
-                map_chip_.push_back(new BlockBase);
 				continue;
 
 			case 11:
@@ -170,8 +170,8 @@ void Map::setup(int stage){
 		map_chip_.clear();
 	}
 
-    
-   
+
+
 
 	delete map_file;
 }
@@ -188,11 +188,11 @@ Vec2f Map::isHitPlayerToBlock(Object player, CONDITION player_condition){
 	{
 		for (int x = 0; x < static_cast<int>(map_chip[y].size()); x++)
 		{
-			if (player_condition == map_chip[y][x]->getCondition())
-				return Vec2f(0.0f, 0.0f);
+			if (map_chip[y][x]->getCondition() == CONDITION::NONE)
+				continue;
 
 			//top
-			if (map_chip[y][x]->getCondition() != map_chip[y - (1*(y!=0))][x]->getCondition())
+			if (map_chip[y][x]->getCondition() != map_chip[y - (1 * (y != 0))][x]->getCondition())
 			{
 				if (player.pos.x() + player.size.x() > map_chip[y][x]->getPos().x() &&
 					player.pos.x() < map_chip[y][x]->getPos().x() + map_chip[y][x]->getSize().x())
@@ -200,10 +200,16 @@ Vec2f Map::isHitPlayerToBlock(Object player, CONDITION player_condition){
 					if (player.pos.y() > map_chip[y][x]->getPos().y() + map_chip[y][x]->getSize().y() - 50.0f &&
 						player.pos.y() < map_chip[y][x]->getPos().y() + map_chip[y][x]->getSize().y())
 					{
+						if (player_condition == map_chip[y][x]->getCondition())
+							return Vec2f(0.0f, 0.0f);
+
 						if (player.vec.y() < 0.0f)
 						{
 							sinking.x() = 0.0f;
 							sinking.y() = map_chip[y][x]->getPos().y() - player.pos.y();
+
+							if (map_chip[y][x]->getStatus() == BLOCK::FALL)
+								map_chip[y][x]->setFallFlag(true);
 
 							return sinking;
 						}
@@ -212,7 +218,7 @@ Vec2f Map::isHitPlayerToBlock(Object player, CONDITION player_condition){
 			}
 
 			//left
-			if (map_chip[y][x]->getCondition() != map_chip[y][x - (1*(x!=0))]->getCondition())
+			if (map_chip[y][x]->getCondition() != map_chip[y][x - (1 * (x != 0))]->getCondition())
 			{
 				if (player.pos.x() + player.size.x() > map_chip[y][x]->getPos().x() &&
 					player.pos.x() + player.size.x() < map_chip[y][x]->getPos().x() + map_chip[y][x]->getSize().x() / 2)
@@ -220,6 +226,9 @@ Vec2f Map::isHitPlayerToBlock(Object player, CONDITION player_condition){
 					if (player.pos.y() + player.size.y() > map_chip[y][x]->getPos().y() &&
 						player.pos.y() < map_chip[y][x]->getPos().y() + map_chip[y][x]->getSize().y())
 					{
+						if (player_condition == map_chip[y][x]->getCondition())
+							return Vec2f(0.0f, 0.0f);
+
 						sinking.x() = player.pos.x() - map_chip[y][x]->getPos().x();
 						sinking.y() = 0.0f;
 
@@ -227,9 +236,9 @@ Vec2f Map::isHitPlayerToBlock(Object player, CONDITION player_condition){
 					}
 				}
 			}
-            
+
 			//right
-			if (map_chip[y][x]->getCondition() != map_chip[y][x + (1*(map_chip[y].size() != x))]->getCondition())
+			if (map_chip[y][x]->getCondition() != map_chip[y][x + (1 * (map_chip[y].size() != x))]->getCondition())
 			{
 				if (player.pos.x() > map_chip[y][x]->getPos().x() + map_chip[y][x]->getSize().x() / 2 &&
 					player.pos.x() < map_chip[y][x]->getPos().x() + map_chip[y][x]->getSize().x())
@@ -237,6 +246,9 @@ Vec2f Map::isHitPlayerToBlock(Object player, CONDITION player_condition){
 					if (player.pos.y() + player.size.y() > map_chip[y][x]->getPos().y() &&
 						player.pos.y() < map_chip[y][x]->getPos().y() + map_chip[y][x]->getSize().y())
 					{
+						if (player_condition == map_chip[y][x]->getCondition())
+							return Vec2f(0.0f, 0.0f);
+
 						sinking.x() = map_chip[y][x]->getPos().x() - player.pos.x();
 						sinking.y() = 0.0f;
 
@@ -246,7 +258,7 @@ Vec2f Map::isHitPlayerToBlock(Object player, CONDITION player_condition){
 			}
 
 			//down
-			if (map_chip[y][x]->getCondition() != map_chip[y + (1*(map_chip.size() != y))][x]->getCondition())
+			if (map_chip[y][x]->getCondition() != map_chip[y + (1 * (map_chip.size() != y))][x]->getCondition())
 			{
 				if (player.pos.x() + player.size.x() > map_chip[y][x]->getPos().x() &&
 					player.pos.x() < map_chip[y][x]->getPos().x() + map_chip[y][x]->getSize().x())
@@ -254,6 +266,9 @@ Vec2f Map::isHitPlayerToBlock(Object player, CONDITION player_condition){
 					if (player.pos.y() + player.pos.y() > map_chip[y][x]->getPos().y() &&
 						player.pos.y() + player.pos.y() < map_chip[y][x]->getPos().y() + 50.0f)
 					{
+						if (player_condition == map_chip[y][x]->getCondition())
+							return Vec2f(0.0f, 0.0f);
+
 						if (player.vec.y() > 0.0f)
 						{
 							sinking.x() = 0.0f;
@@ -264,11 +279,77 @@ Vec2f Map::isHitPlayerToBlock(Object player, CONDITION player_condition){
 					}
 				}
 			}
-            
+
 		}
 	}
 
 	return Vec2f(0.0f, 0.0f);
+}
+
+void Map::isHitMoveBlockToBlock()
+{
+	for (int y = 0; y < static_cast<int>(map_chip.size()); y++)
+	{
+		for (int x = 0; x < static_cast<int>(map_chip[y].size()); x++)
+		{
+			if (map_chip[y][x]->getStatus() != BLOCK::MOVE)
+				continue;
+
+			if (map_chip[y][x]->getMoveFlag() == true)
+			{
+				BlockBase* move_block = map_chip[y][x];
+
+				for (int y1 = 0; y1 < static_cast<int>(map_chip.size()); y1++)
+				{
+					for (int x1 = 0; x1 < static_cast<int>(map_chip[y].size()); x1++)
+					{
+						if (map_chip[y1][x1]->getCondition() == CONDITION::NONE)
+							continue;
+
+						//¶ˆÚ“®
+						if (move_block->getVectol().x() < 0.0f)
+						{
+							if (move_block->getPos().x() < map_chip[y][x1]->getPos().x() + map_chip[y][x1]->getSize().x())
+							{
+								move_block->setPos(Vec2f(map_chip[y][x1]->getPos().x() + map_chip[y][x1]->getSize().x(), move_block->getPos().y()));
+								move_block->setMoveFlag(false);
+							}
+						}
+
+						//‰EˆÚ“®
+						if (move_block->getVectol().x() > 0.0f)
+						{
+							if (move_block->getPos().x() + move_block->getSize().x() > map_chip[y][x1]->getPos().x())
+							{
+								move_block->setPos(Vec2f(map_chip[y][x1]->getPos().x() - move_block->getSize().x(), move_block->getPos().y()));
+								move_block->setMoveFlag(false);
+							}
+						}
+
+						//ãˆÚ“®
+						if (move_block->getVectol().y() > 0.0f)
+						{
+							if (move_block->getPos().y() + move_block->getSize().y() > map_chip[y1][x]->getPos().y())
+							{
+								move_block->setPos(Vec2f(move_block->getPos().x(), map_chip[y1][x]->getPos().y() - move_block->getSize().y()));
+								move_block->setMoveFlag(false);
+							}
+						}
+
+						//‰ºˆÚ“®
+						if (move_block->getVectol().y() < 0.0f)
+						{
+							if (move_block->getPos().y() < map_chip[y1][x]->getPos().y() + map_chip[y1][x]->getSize().y())
+							{
+								move_block->setPos(Vec2f(move_block->getPos().x(), map_chip[y1][x]->getPos().y() + map_chip[y1][x]->getSize().y()));
+								move_block->setMoveFlag(false);
+							}
+						}
+					}
+				}
+			}
+		}
+	}
 }
 
 void Map::selected(Vec2i selected_pos){
@@ -297,6 +378,10 @@ bool Map::sucked(Vec2i selected_pos){
 			return false;
 
 		map_chip[selected_pos.y()][selected_pos.x()]->setCondition(CONDITION::WHITE);
+		if (map_chip[selected_pos.y()][selected_pos.x()]->getMoveFlag() == false)
+			map_chip[selected_pos.y()][selected_pos.x()]->setMoveFlag(true);
+		else
+			map_chip[selected_pos.y()][selected_pos.x()]->setMoveFlag(false);
 		return true;
 
 	case BLOCK::FALL:
@@ -331,6 +416,10 @@ bool Map::released(Vec2i selected_pos)
 			return false;
 
 		map_chip[selected_pos.y()][selected_pos.x()]->setCondition(CONDITION::BLACK);
+		if (map_chip[selected_pos.y()][selected_pos.x()]->getMoveFlag() == false)
+			map_chip[selected_pos.y()][selected_pos.x()]->setMoveFlag(true);
+		else
+			map_chip[selected_pos.y()][selected_pos.x()]->setMoveFlag(false);
 		return true;
 
 	case BLOCK::FALL:

@@ -23,6 +23,8 @@ public:
 	//blockにめり込んだ文の値を(＋)の値で返します
 	Vec2f isHitPlayerToBlock(Object, CONDITION);
 
+	void isHitMoveBlockToBlock();
+
 	//選択されているマップチップの座標を引数で獲得して
 	//枠を光らせる
 	void selected(Vec2i);

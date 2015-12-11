@@ -18,7 +18,8 @@ public:
 	void setStatus(BLOCK _block){ status = _block; }
 	void setCondition(CONDITION _type){ color_type = _type; }
 
-	virtual void setFallFlag(bool){}
+	virtual void setFallFlag(bool fall_flag){ this->fall_flag = fall_flag; }
+	virtual void setMoveFlag(bool move_flag){ this->move_flag = move_flag; }
 
 	Vec2f getPos() { return block.pos; }
 	Vec2f getSize() { return block.size; }
@@ -27,11 +28,17 @@ public:
 	BLOCK getStatus(){ return status; }
 	CONDITION getCondition(){ return color_type; }
 
+	bool getFallFlag(){ return fall_flag; }
+	bool getMoveFlag(){ return move_flag; }
+
 protected:
 
 	CONDITION color_type;
 	BLOCK status;
 	Object block;
 	Texture image;
+
+	bool fall_flag = false;
+	bool move_flag = false;
 
 };

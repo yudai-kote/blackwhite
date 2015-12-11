@@ -14,6 +14,4 @@ public:
 
 private:
 
-	bool move_flag;
-
 };
