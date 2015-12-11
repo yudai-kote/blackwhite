@@ -75,27 +75,27 @@ void Player::move(){
 	//ブロック選択
 	if (select_dir == SELECTDIR::Y ||
 		select_dir == SELECTDIR::NON){
-		if (selection.y() < 2){
+		if (selection.y() > -2){
 			if (env.isPushKey('W')){
-				selection.y()++;
+				selection.y()--;
 			}
 		}
-		if (selection.y() > -2){
+		if (selection.y() < 2){
 			if (env.isPushKey('S')){
-				selection.y()--;
+				selection.y()++;
 			}
 		}
 	}
 	if (select_dir == SELECTDIR::X ||
 		select_dir == SELECTDIR::NON){
-		if (selection.x() < 2){
+		if (selection.x() > -2){
 			if (env.isPushKey('A')){
-				selection.x()++;
+				selection.x()--;
 			}
 		}
-		if (selection.x() > -2){
+		if (selection.x() < 2){
 			if (env.isPushKey('D')){
-				selection.x()--;
+				selection.x()++;
 			}
 		}
 	}
@@ -141,8 +141,9 @@ void Player::move(){
 		player.vec.y() = speed.y();
 	}
 	player.pos.y() += player.vec.y();
-	player.vec.y() -= g;
-	
+	if (g <= 20){
+		player.vec.y() -= g;
+	}
 }
 
 
@@ -150,10 +151,11 @@ void Player::move(){
 bool Player::suckOutColor(CONDITION cond){
 
 	if (cond == CONDITION::BLACK){
-		if (color_abs)
-		if (env.isPushKey('J')){
-			color_abs++;
-			return true;
+		if (color_abs < 4){
+			if (env.isPushKey('J')){
+				color_abs++;
+				return true;
+			}
 		}
 	}
 	if (cond == CONDITION::WHITE){
@@ -187,17 +189,16 @@ void Player::animation(){
 	animation_count++;
 	int index = (animation_count/6)%3 ;
 	cut_x = (index)  * 256.0f;
-
 }
 
-Vec2f Player::getPos(){
-	return player.pos;
+Object Player::getObject(){
+	return player;
 }
 
-Vec2i Player::getSelec(){
-	return selection;
+Vec2i Player::getSelect(){
+	return player_pos()+selection;
 }
-CONDITION Player::getCond(){
+CONDITION Player::getCondition(){
 	if (color_abs < 2){
 		return CONDITION::WHITE;
 	}
@@ -207,4 +208,15 @@ CONDITION Player::getCond(){
 		}
 	}
 	
+}
+
+Vec2i Player::player_pos(){
+	return p_pos = Vec2i(player.pos.x() / static_cast<int>(BLOCKSIZE::WIDTH),std::abs(player.pos.y()) / static_cast<int>(BLOCKSIZE::HEIGHT));
+}
+
+void Player::addPos(Vec2f add){
+	if (add.y() > 0){
+		jump_flag = true;
+	}
+	player.pos += add;
 }

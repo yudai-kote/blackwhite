@@ -38,27 +38,31 @@ public:
 	//ブロックが吸える状態なら選択ボタンを押せる
 	//そして吸ったかどうかを返す
 	bool suckOutColor(CONDITION cond);
-	
+	Vec2i player_pos();
 
 	//ゲッター
-	Vec2f getPos();
-	Vec2i getSelec();
-	CONDITION getCond();
+	Object getObject();
+	Vec2i getSelect();
+	CONDITION getCondition();
 
 	//セッター
 	//ポスのセットは地面判定でやってあげてね
-	void setPos(Vec2f pos);
+	void addPos(Vec2f pos);
 private:
 	Texture player_texture;
-	int ColorMax ;
+	int ColorMax;
 	int animation_count;
 	float cut_x;
     Object player;
 	Vec2i selection;
+	Vec2i p_pos;
 	Vec2f speed;
 	float g;
 	int color_abs;
 	int change_count;
+	bool jump_flag;
 	CONDITION condition;
 	DIRECTION direction;
+
+	
 };
