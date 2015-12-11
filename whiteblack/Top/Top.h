@@ -15,8 +15,8 @@ enum class DIRECTION
 //ƒuƒƒbƒN‚Ì‘å‚«‚³
 enum class BLOCKSIZE
 {
-    WIDTH = 150,
-    HEIGTH = 200
+    WIDTH = 100,
+    HEIGHT = 100
 };
 //‰æ–Ê‘å‚«‚³
 enum WINDOW

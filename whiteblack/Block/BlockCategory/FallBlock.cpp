@@ -13,7 +13,7 @@ FallBlock::~FallBlock()
 void FallBlock::setup()
 {
 	block.size = Vec2f(static_cast<float>(BLOCKSIZE::WIDTH),
-		static_cast<float>(BLOCKSIZE::HEIGTH));
+		static_cast<float>(BLOCKSIZE::HEIGHT));
 
 	block.vec = Vec2f(0.0f, -10.0f);
 

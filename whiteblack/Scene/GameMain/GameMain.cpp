@@ -11,14 +11,16 @@ void GameMain::update(){
     map.update();
     //player.setPos(player.getPos() + map.isHitPlayerToBlock(player.ge));
 
+
 }
 void GameMain::draw(){
     env.bgColor(Color::blue);
     glPushMatrix();
     glTranslated(-player.getPos().x(), -player.getPos().y(),0);
-    
     map.draw();
+    map.selected(player.getSelec());
     glPopMatrix();
+
     player.draw();
 }
 
