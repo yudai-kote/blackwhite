@@ -2,7 +2,7 @@
 
 
 Map::Map(){
-	setup(1);
+
 }
 
 void Map::update(){
@@ -112,6 +112,7 @@ void Map::setup(int stage){
 
 			case 10:
 				map_chip_.push_back(new BlockBase);
+				map_chip_[x]->setCondition(CONDITION::NONE);
 				player_start_pos = Vec2f(
 					static_cast<float>(BLOCKSIZE::WIDTH)*x,
 					-(static_cast<float>(BLOCKSIZE::HEIGHT)*y));
@@ -238,7 +239,7 @@ Vec2f Map::isHitPlayerToBlock(Object player, CONDITION player_condition){
 			}
 
 			//right
-			if (map_chip[y][x]->getCondition() != map_chip[y][x + (1 * (map_chip[y].size() != x))]->getCondition())
+			if (map_chip[y][x]->getCondition() != map_chip[y][x + (1 * (map_chip[y].size()-1 != x))]->getCondition())
 			{
 				if (player.pos.x() > map_chip[y][x]->getPos().x() + map_chip[y][x]->getSize().x() / 2 &&
 					player.pos.x() < map_chip[y][x]->getPos().x() + map_chip[y][x]->getSize().x())
@@ -258,7 +259,7 @@ Vec2f Map::isHitPlayerToBlock(Object player, CONDITION player_condition){
 			}
 
 			//down
-			if (map_chip[y][x]->getCondition() != map_chip[y + (1 * (map_chip.size() != y))][x]->getCondition())
+			if (map_chip[y][x]->getCondition() != map_chip[y + (1 * (map_chip.size()-1 != y))][x]->getCondition())
 			{
 				if (player.pos.x() + player.size.x() > map_chip[y][x]->getPos().x() &&
 					player.pos.x() < map_chip[y][x]->getPos().x() + map_chip[y][x]->getSize().x())
