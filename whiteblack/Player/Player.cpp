@@ -15,7 +15,7 @@ void Player::draw(){
 	if (direction == DIRECTION::LEFT){
 
 		drawTextureBox(
-			0,
+			0 + player.size.x() / 2,
 			0,
 			player.size.x(),
 			player.size.y(),
@@ -32,7 +32,7 @@ void Player::draw(){
 	if (direction == DIRECTION::RIGHT){
 
 		drawTextureBox(
-			0,
+			0+player.size.x()/2,
 			0,
 			player.size.x(),
 			player.size.y(),
@@ -137,11 +137,16 @@ void Player::move(){
 		player.vec.x() = 0;
 	}
 	//ƒWƒƒƒ“ƒv
-	if (env.isPushKey('K')){
-		player.vec.y() = speed.y();
+	if (player.vec.y() < -0.1){
+		if (jump_flag == true){
+			if (env.isPushKey('K')){
+				player.vec.y() = speed.y();
+				jump_flag = false;
+			}
+		}
 	}
 	player.pos.y() += player.vec.y();
-	if (g <= 20){
+	if (player.vec.y() >= -50){
 		player.vec.y() -= g;
 	}
 }
@@ -211,12 +216,13 @@ CONDITION Player::getCondition(){
 }
 
 Vec2i Player::player_pos(){
-	return p_pos = Vec2i(player.pos.x() / static_cast<int>(BLOCKSIZE::WIDTH),std::abs(player.pos.y()) / static_cast<int>(BLOCKSIZE::HEIGHT));
+	return p_pos = Vec2i((player.pos.x() + player.size.x() / 2) / static_cast<int>(BLOCKSIZE::WIDTH), (std::abs(player.pos.y())+player.size.y() / 2) / static_cast<int>(BLOCKSIZE::HEIGHT));
 }
 
 void Player::addPos(Vec2f add){
 	if (add.y() > 0){
 		jump_flag = true;
+		player.vec.y() = 0;
 	}
 	player.pos += add;
 }
