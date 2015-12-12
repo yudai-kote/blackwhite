@@ -37,7 +37,8 @@ public:
 	SELECTDIR select_dir;
 	//ブロックが吸える状態なら選択ボタンを押せる
 	//そして吸ったかどうかを返す
-	bool suckOutColor();
+	bool suckColor();
+	bool outColor();
 	Vec2i player_pos();
 
 	//ゲッター

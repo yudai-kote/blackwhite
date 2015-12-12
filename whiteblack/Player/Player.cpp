@@ -153,24 +153,20 @@ void Player::move(){
 
 
 
-bool Player::suckOutColor(){
+bool Player::suckColor(){
 
 	if (color_abs < 3){
 		if (env.isPushKey('J')){
 			return true;
 		}
 	}
-
-
+	return false;
+}
+bool Player::outColor(){
 	if (color_abs >= 0){
 		if (env.isPushKey('L')){
-			color_abs--;
 			return true;
 		}
-	}
-
-	if (env.isPushKey('I')){
-		color_abs = 0;
 	}
 	return false;
 }
