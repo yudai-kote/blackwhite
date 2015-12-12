@@ -1,6 +1,20 @@
 #include "Map.h"
 
 
+struct P
+{
+	Vec2f po, si;
+
+	P(Vec2f po, Vec2f si) :
+		po(po),
+		si(si)
+	{
+
+	}
+};
+
+P p(Vec2f::Zero(), Vec2f::Zero());
+
 Map::Map(){
 
 }
@@ -19,6 +33,8 @@ void Map::draw(){
 
 		}
 	}
+
+	drawBox(p.po.x(), p.po.y(), p.si.x(), p.si.y(), 10, Color::green);
 }
 
 void Map::setup(int stage){
@@ -183,6 +199,9 @@ Vec2f Map::getPlayerStartPos() const{
 
 Vec2f Map::isHitPlayerToBlock(Object player, CONDITION player_condition){
 
+	p.po = player.pos;
+	p.si = player.size;
+
 	Vec2f sinking;
 
 	for (int y = 0; y < static_cast<int>(map_chip.size()); y++)
@@ -207,7 +226,7 @@ Vec2f Map::isHitPlayerToBlock(Object player, CONDITION player_condition){
 						if (player.vec.y() < 0.0f)
 						{
 							sinking.x() = 0.0f;
-							sinking.y() = map_chip[y][x]->getPos().y() - player.pos.y();
+							sinking.y() = map_chip[y][x]->getPos().y() + map_chip[y][x]->getSize().y() - player.pos.y();
 
 							if (map_chip[y][x]->getStatus() == BLOCK::FALL)
 								map_chip[y][x]->setFallFlag(true);
@@ -230,7 +249,7 @@ Vec2f Map::isHitPlayerToBlock(Object player, CONDITION player_condition){
 						if (player_condition == map_chip[y][x]->getCondition())
 							return Vec2f(0.0f, 0.0f);
 
-						sinking.x() = player.pos.x() - map_chip[y][x]->getPos().x();
+						sinking.x() = map_chip[y][x]->getPos().x() - (player.pos.x() + player.size.x());
 						sinking.y() = 0.0f;
 
 						return sinking;
@@ -250,7 +269,7 @@ Vec2f Map::isHitPlayerToBlock(Object player, CONDITION player_condition){
 						if (player_condition == map_chip[y][x]->getCondition())
 							return Vec2f(0.0f, 0.0f);
 
-						sinking.x() = map_chip[y][x]->getPos().x() - player.pos.x();
+						sinking.x() = (map_chip[y][x]->getPos().x() + map_chip[y][x]->getSize().x())- player.pos.x();
 						sinking.y() = 0.0f;
 
 						return sinking;
@@ -273,7 +292,7 @@ Vec2f Map::isHitPlayerToBlock(Object player, CONDITION player_condition){
 						if (player.vec.y() > 0.0f)
 						{
 							sinking.x() = 0.0f;
-							sinking.y() = player.pos.y() - map_chip[y][x]->getPos().y();
+							sinking.y() = map_chip[y][x]->getPos().y() - (player.pos.y() + player.size.y());
 
 							return sinking;
 						}
