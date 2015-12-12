@@ -224,7 +224,7 @@ CONDITION Player::getCondition(){
 }
 
 Vec2i Player::player_pos(){
-	return p_pos = Vec2i(player.pos.x() / static_cast<int>(BLOCKSIZE::WIDTH),std::abs(player.pos.y()) / static_cast<int>(BLOCKSIZE::HEIGHT));
+	return p_pos = Vec2i((player.pos.x() + player.size.x() / 2) / static_cast<int>(BLOCKSIZE::WIDTH), (std::abs(player.pos.y())+player.size.y() / 2) / static_cast<int>(BLOCKSIZE::HEIGHT));
 }
 
 void Player::addPos(Vec2f add){
