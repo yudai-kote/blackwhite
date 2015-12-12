@@ -47,6 +47,7 @@ enum class BLOCK
 enum class CONDITION{
     BLACK,
     WHITE,
+	STRIPE,
     NONE
 };
 
