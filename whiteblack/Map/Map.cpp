@@ -192,7 +192,7 @@ Vec2f Map::isHitPlayerToBlock(Object player, CONDITION player_condition){
 				return Vec2f(0.0f, 0.0f);
 
 			//top
-			if (map_chip[y][x]->getCondition() != map_chip[y - 1][x]->getCondition())
+			if (map_chip[y][x]->getCondition() != map_chip[y - (1*(y!=0))][x]->getCondition())
 			{
 				if (player.pos.x() + player.size.x() > map_chip[y][x]->getPos().x() &&
 					player.pos.x() < map_chip[y][x]->getPos().x() + map_chip[y][x]->getSize().x())
@@ -212,7 +212,7 @@ Vec2f Map::isHitPlayerToBlock(Object player, CONDITION player_condition){
 			}
 
 			//left
-			if (map_chip[y][x]->getCondition() != map_chip[y][x - 1]->getCondition())
+			if (map_chip[y][x]->getCondition() != map_chip[y][x - (1*(x!=0))]->getCondition())
 			{
 				if (player.pos.x() + player.size.x() > map_chip[y][x]->getPos().x() &&
 					player.pos.x() + player.size.x() < map_chip[y][x]->getPos().x() + map_chip[y][x]->getSize().x() / 2)
@@ -227,9 +227,9 @@ Vec2f Map::isHitPlayerToBlock(Object player, CONDITION player_condition){
 					}
 				}
 			}
-
+            
 			//right
-			if (map_chip[y][x]->getCondition() != map_chip[y][x + 1]->getCondition())
+			if (map_chip[y][x]->getCondition() != map_chip[y][x + (1*(map_chip[y].size() != x))]->getCondition())
 			{
 				if (player.pos.x() > map_chip[y][x]->getPos().x() + map_chip[y][x]->getSize().x() / 2 &&
 					player.pos.x() < map_chip[y][x]->getPos().x() + map_chip[y][x]->getSize().x())
@@ -246,7 +246,7 @@ Vec2f Map::isHitPlayerToBlock(Object player, CONDITION player_condition){
 			}
 
 			//down
-			if (map_chip[y][x]->getCondition() != map_chip[y + 1][x]->getCondition())
+			if (map_chip[y][x]->getCondition() != map_chip[y + (1*(map_chip.size() != y))][x]->getCondition())
 			{
 				if (player.pos.x() + player.size.x() > map_chip[y][x]->getPos().x() &&
 					player.pos.x() < map_chip[y][x]->getPos().x() + map_chip[y][x]->getSize().x())
@@ -264,6 +264,7 @@ Vec2f Map::isHitPlayerToBlock(Object player, CONDITION player_condition){
 					}
 				}
 			}
+            
 		}
 	}
 
