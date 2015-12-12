@@ -146,7 +146,7 @@ void Player::move(){
 		}
 	}
 	player.pos.y() += player.vec.y();
-	if (player.vec.y() >= -50){
+	if (player.vec.y() >= -45){
 		player.vec.y() -= g;
 	}
 }
