@@ -11,24 +11,11 @@ void Player::update(){
 }
 
 void Player::draw(){
-	drawTextureBox(
-		player.pos.x(),
-		player.pos.y(),
-		player.size.x(),
-		player.size.y(),
-		0 + cut_x,
-		0,
-		256,
-		256,
-		player_texture,
-		Color::white,
-		0, Vec2f(-1, 1),
-		Vec2f(player.size.x() / 2, 0)
-		);
+	
 	if (direction == DIRECTION::LEFT){
 
 		drawTextureBox(
-			0,
+			0 + player.size.x() / 2,
 			0,
 			player.size.x(),
 			player.size.y(),
@@ -45,7 +32,7 @@ void Player::draw(){
 	if (direction == DIRECTION::RIGHT){
 
 		drawTextureBox(
-			0,
+			0+player.size.x()/2,
 			0,
 			player.size.x(),
 			player.size.y(),
@@ -150,8 +137,13 @@ void Player::move(){
 		player.vec.x() = 0;
 	}
 	//ƒWƒƒƒ“ƒv
-	if (env.isPushKey('K')){
-		player.vec.y() = speed.y();
+	if (player.vec.y() < -0.1){
+		if (jump_flag == true){
+			if (env.isPushKey('K')){
+				player.vec.y() = speed.y();
+				jump_flag = false;
+			}
+		}
 	}
 	player.pos.y() += player.vec.y();
 	if (player.vec.y() >= -50){
@@ -230,6 +222,7 @@ Vec2i Player::player_pos(){
 void Player::addPos(Vec2f add){
 	if (add.y() > 0){
 		jump_flag = true;
+		player.vec.y() = 0;
 	}
 	player.pos += add;
 }
