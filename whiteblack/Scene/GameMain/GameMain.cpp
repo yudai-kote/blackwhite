@@ -9,9 +9,18 @@ GameMain::GameMain(){
 void GameMain::update(){
     player.update();
     map.update();
-    player.addPos(map.isHitPlayerToBlock(player.getObject(),player.getCondition()));
 
-    std::cout << player.getObject().vec << std::endl;
+    player.addPos(map.isHitPlayerToBlock(player.getObject(),player.getCondition()));
+    //std::cout << player.getObject().vec << std::endl;
+    if (player.suckColor()){
+        if (map.sucked(player.getSelect())){
+            player.addColor();
+        }
+    }
+    if (player.outColor()){
+        //if (map.)
+    }
+
 }
 void GameMain::draw(){
     env.bgColor(Color::blue);
