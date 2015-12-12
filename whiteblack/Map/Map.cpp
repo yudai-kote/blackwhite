@@ -202,7 +202,7 @@ Vec2f Map::isHitPlayerToBlock(Object player, CONDITION player_condition){
 	p.po = player.pos;
 	p.si = player.size;
 
-	Vec2f sinking;
+	Vec2f sinking = Vec2f::Zero();
 
 	for (int y = 0; y < static_cast<int>(map_chip.size()); y++)
 	{
@@ -225,13 +225,10 @@ Vec2f Map::isHitPlayerToBlock(Object player, CONDITION player_condition){
 
 						if (player.vec.y() < 0.0f)
 						{
-							sinking.x() = 0.0f;
 							sinking.y() = map_chip[y][x]->getPos().y() + map_chip[y][x]->getSize().y() - player.pos.y();
 
 							if (map_chip[y][x]->getStatus() == BLOCK::FALL)
 								map_chip[y][x]->setFallFlag(true);
-
-							return sinking;
 						}
 					}
 				}
@@ -250,9 +247,6 @@ Vec2f Map::isHitPlayerToBlock(Object player, CONDITION player_condition){
 							return Vec2f(0.0f, 0.0f);
 
 						sinking.x() = map_chip[y][x]->getPos().x() - (player.pos.x() + player.size.x());
-						sinking.y() = 0.0f;
-
-						return sinking;
 					}
 				}
 			}
@@ -270,9 +264,6 @@ Vec2f Map::isHitPlayerToBlock(Object player, CONDITION player_condition){
 							return Vec2f(0.0f, 0.0f);
 
 						sinking.x() = (map_chip[y][x]->getPos().x() + map_chip[y][x]->getSize().x())- player.pos.x();
-						sinking.y() = 0.0f;
-
-						return sinking;
 					}
 				}
 			}
@@ -291,10 +282,7 @@ Vec2f Map::isHitPlayerToBlock(Object player, CONDITION player_condition){
 
 						if (player.vec.y() > 0.0f)
 						{
-							sinking.x() = 0.0f;
 							sinking.y() = map_chip[y][x]->getPos().y() - (player.pos.y() + player.size.y());
-
-							return sinking;
 						}
 					}
 				}
@@ -303,7 +291,7 @@ Vec2f Map::isHitPlayerToBlock(Object player, CONDITION player_condition){
 		}
 	}
 
-	return Vec2f(0.0f, 0.0f);
+	return sinking;
 }
 
 void Map::isHitMoveBlockToBlock()
