@@ -11,7 +11,20 @@ void Player::update(){
 }
 
 void Player::draw(){
-	
+	drawTextureBox(
+		player.pos.x(),
+		player.pos.y(),
+		player.size.x(),
+		player.size.y(),
+		0 + cut_x,
+		0,
+		256,
+		256,
+		player_texture,
+		Color::white,
+		0, Vec2f(-1, 1),
+		Vec2f(player.size.x() / 2, 0)
+		);
 	if (direction == DIRECTION::LEFT){
 
 		drawTextureBox(
@@ -141,7 +154,7 @@ void Player::move(){
 		player.vec.y() = speed.y();
 	}
 	player.pos.y() += player.vec.y();
-	if (g <= 20){
+	if (player.vec.y() >= -50){
 		player.vec.y() -= g;
 	}
 }
@@ -211,7 +224,7 @@ CONDITION Player::getCondition(){
 }
 
 Vec2i Player::player_pos(){
-	return p_pos = Vec2i(player.pos.x() / static_cast<int>(BLOCKSIZE::WIDTH),std::abs(player.pos.y()) / static_cast<int>(BLOCKSIZE::HEIGHT));
+	return p_pos = Vec2i((player.pos.x() + player.size.x() / 2) / static_cast<int>(BLOCKSIZE::WIDTH), (std::abs(player.pos.y())+player.size.y() / 2) / static_cast<int>(BLOCKSIZE::HEIGHT));
 }
 
 void Player::addPos(Vec2f add){
