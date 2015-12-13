@@ -37,7 +37,8 @@ public:
 	SELECTDIR select_dir;
 	//ブロックが吸える状態なら選択ボタンを押せる
 	//そして吸ったかどうかを返す
-	bool suckOutColor(CONDITION cond);
+	bool suckColor();
+	bool outColor();
 	Vec2i player_pos();
 
 	//ゲッター
@@ -48,6 +49,8 @@ public:
 	//セッター
 	//ポスのセットは地面判定でやってあげてね
 	void addPos(Vec2f pos);
+	void addColor();
+	void subColor();
 private:
 	Texture player_texture;
 	int ColorMax;
