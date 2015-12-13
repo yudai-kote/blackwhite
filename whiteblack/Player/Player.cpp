@@ -67,6 +67,7 @@ void Player::setup(Vec2f pos){
 	ColorMax = 3;
 	color_abs = 0;
 	animation_count = 0;
+	jump_flag = false;
 }
 
 void Player::move(){
@@ -137,14 +138,15 @@ void Player::move(){
 		player.vec.x() = 0;
 	}
 	//ƒWƒƒƒ“ƒv
-	if (player.vec.y() < -0.1){
-		if (jump_flag == true){
-			if (env.isPushKey('K')){
-				player.vec.y() = speed.y();
-				jump_flag = false;
-			}
+
+	if (jump_flag == true){
+		if (env.isPushKey('K')){
+			player.vec.y() = speed.y();
+			jump_flag = false;
 		}
+		
 	}
+
 	player.pos.y() += player.vec.y();
 	if (player.vec.y() >= -45){
 		player.vec.y() -= g;
@@ -154,7 +156,6 @@ void Player::move(){
 
 
 bool Player::suckColor(){
-
 	if (color_abs < 3){
 		if (env.isPushKey('J')){
 			return true;
