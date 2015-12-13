@@ -1,10 +1,10 @@
 
 #include "../Top/Top.h"
 #include "../Block/BlockBase.h"
-#include "../Block/NormalBlock.h"
-#include "../Block/MoveBlock.h"
-#include "../Block/FallBlock.h"
-#include "../Block/DoubleBlock.h"
+#include "../Block/BlockCategory/NormalBlock.h"
+#include "../Block/BlockCategory/MoveBlock.h"
+#include "../Block/BlockCategory/FallBlock.h"
+#include "../Block/BlockCategory/DoubleBlock.h"
 
 
 
@@ -22,6 +22,8 @@ public:
 	//struct型のplayerとplayerのconditionを引数でもらって
 	//blockにめり込んだ文の値を(＋)の値で返します
 	Vec2f isHitPlayerToBlock(Object, CONDITION);
+
+	void isHitMoveBlockToBlock();
 
 	//選択されているマップチップの座標を引数で獲得して
 	//枠を光らせる

@@ -1,7 +1,8 @@
 #include "SceneManager.h"
 
 SceneManager::SceneManager(){
-    scene_number = SCENE::TITLE;
+    scene_number = SCENE::GAME;
+    GameMain.setup();
 }
 
 void SceneManager::update(){
@@ -15,6 +16,7 @@ void SceneManager::update(){
     case SCENE::STAGESELECT:
         break;
     case SCENE::GAME:
+        GameMain.update();
         break;
     }
 }
@@ -29,6 +31,7 @@ void SceneManager::draw(){
     case SCENE::STAGESELECT:
         break;
     case SCENE::GAME:
+        GameMain.draw();
         break;
     }
 

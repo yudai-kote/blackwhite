@@ -44,7 +44,7 @@
 //void Block::setup(){
 //
 //	block.size = Vec2f((float)BLOCKSIZE::WIDTH,
-//		(float)BLOCKSIZE::HEIGTH);
+//		(float)BLOCKSIZE::HEIGHT);
 //
 //	block.vec = Vec2f(0, 0);
 //
