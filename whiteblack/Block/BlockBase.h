@@ -28,7 +28,6 @@ public:
 	virtual Vec2f getVectol() { return block.vec; }
 
     Object getObject(){ return block; }
-    void setType(int _a){ type_num = _a; }
 	virtual BLOCK getStatus(){ return status; }
 	virtual CONDITION getCondition(){ return color_type; }
 
@@ -42,7 +41,6 @@ protected:
 	Object block;
 	Texture image_white;
 	Texture image_black;
-	int type_num;
 	bool fall_flag = false;
 	bool move_flag = false;
 
