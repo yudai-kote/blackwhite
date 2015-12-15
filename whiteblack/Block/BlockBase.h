@@ -5,29 +5,42 @@ class BlockBase
 {
 public:
 
-	virtual void update() = 0;
-	virtual void draw() = 0;
-	virtual void setup() = 0;
+	BlockBase(){};
+	virtual ~BlockBase(){};
 
-	virtual Vec2f Collision(Object _player,
-		BLOCK _up, BLOCK _down,
-		DIRECTION _direction = DIRECTION::NON,
-		int move_vector = 0) = 0;
+    virtual void update(){};
+    virtual void draw(){};
+    virtual void setup(){};
 
-	void setPos(Vec2f _pos){ block.pos = _pos; }
-	void setStatus(BLOCK _block){ status = _block; }
-	void setCondition(CONDITION _type){ color_type = _type; }
+	virtual void setImage(Texture image){ this->image = image; }
+	virtual void setPos(Vec2f _pos){ block.pos = _pos; }
+	virtual void setVec(Vec2f _vec){ block.vec = _vec; }
+	virtual void setStatus(BLOCK _block){ status = _block; }
+	virtual void setCondition(CONDITION _type){ color_type = _type; }
 
-	Vec2f getBlockPos(){ return block.pos; }
-	Vec2f getBlockSize(){ return block.size; }
-	Vec2f getBlockVectol(){ return block.vec; }
+	virtual void setFallFlag(bool fall_flag){ this->fall_flag = fall_flag; }
+	virtual void setMoveFlag(bool move_flag){ this->move_flag = move_flag; }
 
-	BLOCK getBlockStatus(){ return status; }
-	CONDITION getCondition(){ return color_type; }
+	virtual Vec2f getPos() { return block.pos; }
+	virtual Vec2f getSize() { return block.size; }
+	virtual Vec2f getVectol() { return block.vec; }
 
+    Object getObject(){ return block; }
+    void setType(int _a){ type_num = _a; }
+	virtual BLOCK getStatus(){ return status; }
+	virtual CONDITION getCondition(){ return color_type; }
+
+	virtual bool getFallFlag(){ return fall_flag; }
+	virtual bool getMoveFlag(){ return move_flag; }
+
+    int type_num;
 protected:
 
 	CONDITION color_type;
 	BLOCK status;
 	Object block;
+	Texture image;
+	bool fall_flag = false;
+	bool move_flag = false;
+
 };
