@@ -25,19 +25,21 @@ public:
 	virtual Vec2f getSize() { return block.size; }
 	virtual Vec2f getVectol() { return block.vec; }
 
+    Object getObject(){ return block; }
+    void setType(int _a){ type_num = _a; }
 	virtual BLOCK getStatus(){ return status; }
 	virtual CONDITION getCondition(){ return color_type; }
 
 	virtual bool getFallFlag(){ return fall_flag; }
 	virtual bool getMoveFlag(){ return move_flag; }
 
+    int type_num;
 protected:
 
 	CONDITION color_type;
 	BLOCK status;
 	Object block;
 	Texture image;
-
 	bool fall_flag = false;
 	bool move_flag = false;
 

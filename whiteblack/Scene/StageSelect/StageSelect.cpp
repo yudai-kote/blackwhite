@@ -212,7 +212,7 @@ void StageSelect::fade_In_()
             col_ = Color(0.0f, 0.0f, 0.0f, 1.0f);
             break;
         case YuCounter::UPDATE:
-            col_.a() -= 1.0f / 30;
+            //col_.a() -= 1.0f / 30;
             break;
         case YuCounter::END:
             col_ = Color(0.0f, 0.0f, 0.0f, 0.0f);
@@ -233,7 +233,7 @@ SCENE StageSelect::fade_Out_()
             col_ = Color(0.0f, 0.0f, 0.0f, 0.0f);
             break;
         case YuCounter::UPDATE:
-            col_.a() += 1.0f / 30;
+            //col_.a() += 1.0f / 30;
             break;
         case YuCounter::END:
             setup();

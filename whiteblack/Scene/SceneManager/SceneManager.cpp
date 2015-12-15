@@ -1,7 +1,7 @@
 #include "SceneManager.h"
 
 SceneManager::SceneManager(){
-    scene_number = SCENE::GAME;
+    scene_number = SCENE::TITLE;
     GameMain.setup();
 }
 
