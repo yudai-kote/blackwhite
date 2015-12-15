@@ -187,7 +187,7 @@ void Map::setup(int stage){
             map_chip_[x]->setPos(Vec2f(
                 static_cast<float>(BLOCKSIZE::WIDTH)*x,
                 -(static_cast<float>(BLOCKSIZE::HEIGHT)*y)));
-            map_chip_[x]->setType(type);
+            
         }
 
         map_chip.push_back(map_chip_);
@@ -211,100 +211,49 @@ Vec2f Map::isHitPlayerToBlock(Object player, CONDITION player_condition){
     p.si = player.size;
     Vec2f sinking = Vec2f::Zero();
     Vec2f a;
-    
-    for (int y = 0; y < static_cast<int>(map_chip.size()); y++)
-    {
-        for (int x = 0; x < static_cast<int>(map_chip[y].size()); x++)
+    if (player_condition == CONDITION::WHITE){
+        for (int y = 0; y < static_cast<int>(map_chip.size()); y++)
         {
-            if (map_chip[y][x]->type_num == 1){
-                a = collsion(player, map_chip[y][x]->getObject(),
-                    map_chip[y - (1 * y != 0)][x]->type_num == 0,
-                    map_chip[y + (1 * y != (map_chip.size() - 1))][x]->type_num == 0);
-                
-                sinking.x() = absmax(sinking.x(), a.x());
-                sinking.y() = absmax(sinking.y(), a.y());
+            for (int x = 0; x < static_cast<int>(map_chip[y].size()); x++)
+            {
+                //当たり判定をするブロックの条件
+                if (map_chip[y][x]->getCondition() == CONDITION::STRIPE ||
+                    map_chip[y][x]->getCondition() == CONDITION::BLACK){
+                    a = collsion(player, map_chip[y][x]->getObject(),
+                        //上のブロックに当たり判定がなかったらの条件式
+                        map_chip[y - (1 * y != 0)][x]->getCondition() != CONDITION::WHITE,
+                        //下のブロックの当たり判定がなかったらの条件式
+                        map_chip[y + (1 * y != (map_chip.size() - 1))][x]->getCondition() != CONDITION::WHITE);
 
+                    sinking.x() = absmax(sinking.x(), a.x());
+                    sinking.y() = absmax(sinking.y(), a.y());
+                }
             }
-            //if (player.pos.x() <)
-            //top
-            //if (map_chip[y][x]->getCondition() != map_chip[y - (1 * (y != 0))][x]->getCondition())
-            //{
-            //	if (player.pos.x() + player.size.x() > map_chip[y][x]->getPos().x() &&
-            //		player.pos.x() < map_chip[y][x]->getPos().x() + map_chip[y][x]->getSize().x())
-            //	{
-            //		if (player.pos.y() > map_chip[y][x]->getPos().y() + map_chip[y][x]->getSize().y() - 50.0f &&
-            //			player.pos.y() < map_chip[y][x]->getPos().y() + map_chip[y][x]->getSize().y())
-            //		{
-            //			if (player_condition == map_chip[y][x]->getCondition())
-            //				return Vec2f(0.0f, 0.0f);
-
-            //			if (player.vec.y() < 0.0f)
-            //			{
-            //				sinking.y() = map_chip[y][x]->getPos().y() + map_chip[y][x]->getSize().y() - player.pos.y();
-
-            //				if (map_chip[y][x]->getStatus() == BLOCK::FALL)
-            //					map_chip[y][x]->setFallFlag(true);
-            //			}
-            //		}
-            //	}
-            //}
-
-            ////left
-            //if (map_chip[y][x]->getCondition() != map_chip[y][x - (1 * (x != 0))]->getCondition())
-            //{
-            //	if (player.pos.x() + player.size.x() > map_chip[y][x]->getPos().x() &&
-            //		player.pos.x() + player.size.x() < map_chip[y][x]->getPos().x() + map_chip[y][x]->getSize().x() / 2)
-            //	{
-            //		if (player.pos.y() + player.size.y() > map_chip[y][x]->getPos().y() &&
-            //			player.pos.y() < map_chip[y][x]->getPos().y() + map_chip[y][x]->getSize().y())
-            //		{
-            //			if (player_condition == map_chip[y][x]->getCondition())
-            //				return Vec2f(0.0f, 0.0f);
-
-            //			sinking.x() = map_chip[y][x]->getPos().x() - (player.pos.x() + player.size.x());
-            //		}
-            //	}
-            //}
-
-            ////right
-            //if (map_chip[y][x]->getCondition() != map_chip[y][x + (1 * (map_chip[y].size()-1 != x))]->getCondition())
-            //{
-            //	if (player.pos.x() > map_chip[y][x]->getPos().x() + map_chip[y][x]->getSize().x() / 2 &&
-            //		player.pos.x() < map_chip[y][x]->getPos().x() + map_chip[y][x]->getSize().x())
-            //	{
-            //		if (player.pos.y() + player.size.y() > map_chip[y][x]->getPos().y() &&
-            //			player.pos.y() < map_chip[y][x]->getPos().y() + map_chip[y][x]->getSize().y())
-            //		{
-            //			if (player_condition == map_chip[y][x]->getCondition())
-            //				return Vec2f(0.0f, 0.0f);
-
-            //			sinking.x() = (map_chip[y][x]->getPos().x() + map_chip[y][x]->getSize().x())- player.pos.x();
-            //		}
-            //	}
-            //}
-
-            ////down
-            //if (map_chip[y][x]->getCondition() != map_chip[y + (1 * (map_chip.size()-1 != y))][x]->getCondition())
-            //{
-            //	if (player.pos.x() + player.size.x() > map_chip[y][x]->getPos().x() &&
-            //		player.pos.x() < map_chip[y][x]->getPos().x() + map_chip[y][x]->getSize().x())
-            //	{
-            //		if (player.pos.y() + player.pos.y() > map_chip[y][x]->getPos().y() &&
-            //			player.pos.y() + player.pos.y() < map_chip[y][x]->getPos().y() + 50.0f)
-            //		{
-            //			if (player_condition == map_chip[y][x]->getCondition())
-            //				return Vec2f(0.0f, 0.0f);
-
-            //			if (player.vec.y() > 0.0f)
-            //			{
-            //				sinking.y() = map_chip[y][x]->getPos().y() - (player.pos.y() + player.size.y());
-            //			}
-            //		}
-            //	}
-            //}
-
         }
     }
+    if (player_condition == CONDITION::BLACK){
+
+        for (int y = 0; y < static_cast<int>(map_chip.size()); y++)
+        {
+            for (int x = 0; x < static_cast<int>(map_chip[y].size()); x++)
+            {
+                //当たり判定をするブロックの条件
+                if (map_chip[y][x]->getCondition() == CONDITION::STRIPE ||
+                    map_chip[y][x]->getCondition() == CONDITION::WHITE){
+                    a = collsion(player, map_chip[y][x]->getObject(),
+                        //上のブロックに当たり判定がなかったらの条件式
+                        map_chip[y - (1 * y != 0)][x]->getCondition() != CONDITION::BLACK,
+                        //下のブロックの当たり判定がなかったらの条件式
+                        map_chip[y + (1 * y != (map_chip.size() - 1))][x]->getCondition() != CONDITION::BLACK);
+
+                    sinking.x() = absmax(sinking.x(), a.x());
+                    sinking.y() = absmax(sinking.y(), a.y());
+                }
+            }
+        }
+    }
+
+
 
     return sinking;
 }
@@ -482,19 +431,19 @@ Vec2f Map::collsion(Object player, Object block, bool up, bool down){
 
         //上
         if (player.vec.y() < 0){
-            if (player.pos.y() > block.pos.y() + block.size.y() - (50 * up)){
+            if (player.pos.y() > block.pos.y() + block.size.y() - (27 * up)){
                 return Vec2f(0, (block.pos.y() + block.size.y()) - player.pos.y());
             }
         }
         //下
-        if (player.vec.y() > 0){
-            if (player.pos.y() < block.pos.y() - player.size.y() + (50 * down)){
+        if (player.vec.y() >= 0){
+            if (player.pos.y() < block.pos.y() - player.size.y() + (27 * down)){
                 return Vec2f(0, (block.pos.y() - player.size.y()) - player.pos.y());
             }
         }
         //左
-        
         if (player.vec.x() > 0){
+            // if (player.pos.x() > block.pos.x()
             return Vec2f((block.pos.x() - player.size.x()) - player.pos.x(), 0);
         }
 
