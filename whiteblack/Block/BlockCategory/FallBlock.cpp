@@ -41,5 +41,9 @@ void FallBlock::update()
 
 void FallBlock::draw()
 {
-	drawFillBox(block.pos.x(), block.pos.y(), block.size.x(), block.size.y(), Color::yellow);
+	if (color_type == CONDITION::WHITE)
+		drawTextureBox(block.pos.x(), block.pos.y(), block.size.x(), block.size.y(), 0, 0, 32, 32, image_white);
+
+	if (color_type == CONDITION::BLACK)
+		drawTextureBox(block.pos.x(), block.pos.y(), block.size.x(), block.size.y(), 0, 0, 32, 32, image_black);
 }
