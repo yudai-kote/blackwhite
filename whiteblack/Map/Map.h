@@ -43,6 +43,8 @@ private:
 	Vec2f player_start_pos;
 
 	void mapDelete();
+
+    Vec2f collsion(Object player, Object block, bool, bool);
     
 };
 
