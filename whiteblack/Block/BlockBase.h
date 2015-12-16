@@ -12,7 +12,9 @@ public:
     virtual void draw(){};
     virtual void setup(){};
 
-	virtual void setImage(Texture image){ this->image = image; }
+	virtual void setImageWhite(Texture image){ image_white = image; }
+	virtual void setImageBlack(Texture image){ image_black = image; }
+	virtual void setImageStripe(Texture image){};
 	virtual void setPos(Vec2f _pos){ block.pos = _pos; }
 	virtual void setVec(Vec2f _vec){ block.vec = _vec; }
 	virtual void setStatus(BLOCK _block){ status = _block; }
@@ -25,6 +27,7 @@ public:
 	virtual Vec2f getSize() { return block.size; }
 	virtual Vec2f getVectol() { return block.vec; }
 
+    Object getObject(){ return block; }
 	virtual BLOCK getStatus(){ return status; }
 	virtual CONDITION getCondition(){ return color_type; }
 
@@ -36,8 +39,8 @@ protected:
 	CONDITION color_type;
 	BLOCK status;
 	Object block;
-	Texture image;
-
+	Texture image_white;
+	Texture image_black;
 	bool fall_flag = false;
 	bool move_flag = false;
 

@@ -219,6 +219,9 @@ void Player::addPos(Vec2f add){
 		jump_flag = true;
 		player.vec.y() = 0;
 	}
+    if (add.y() < 0){
+        player.vec.y() = -0.1;
+    }
 	player.pos += add;
 }
 
