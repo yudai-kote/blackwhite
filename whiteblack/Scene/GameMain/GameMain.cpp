@@ -9,17 +9,19 @@ GameMain::GameMain(){
 void GameMain::update(){
     player.update();
     map.update();
-    //std::cout << player.getObject().vec.y() << std::endl;
     player.addPos(map.isHitPlayerToBlock(player.getObject(),player.getCondition()));
-    //‹zû
-    if (player.suckColor()){
-        if (map.sucked(player.getSelect())){
-            player.addColor();
-        }
-    }
+    //std::cout << (int)player.getCondition() << std::endl;
     //•úo
     if (player.outColor()){
-        //if (map.)
+        if (map.sucked(player.getSelect())){
+            player.subColor();
+        }
+    }
+    //‹zû
+    if (player.suckColor()){
+        if (map.released(player.getSelect())){
+            player.addColor();
+        }
     }
 
 }

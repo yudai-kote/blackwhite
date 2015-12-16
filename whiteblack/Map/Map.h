@@ -45,7 +45,25 @@ private:
 	void mapDelete();
 
     Vec2f collsion(Object player, Object block, bool, bool);
+
     
+    Texture blackblock;
+    Texture whiteblock;
+    Texture stripeblock;
+    Texture doubleblock_white;
+    Texture doubleblock_black;
+    Texture downblock_black;
+    Texture downblock_white;
+    
+    Texture moveblock_up;
+    Texture moveblock_down;
+    Texture moveblock_left;
+    Texture moveblock_right;
+    Texture movedown_white;
+    Texture moveleft_white;
+    Texture moveright_white;
+    Texture moveup_white;
+
 };
 
 
