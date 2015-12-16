@@ -27,7 +27,15 @@ public:
 	virtual Vec2f getSize() { return block.size; }
 	virtual Vec2f getVectol() { return block.vec; }
 
-    Object getObject(){ return block; }
+    Object getObject(){
+
+		Object obj;
+		obj.pos = block.pos;
+		obj.size = block.size;
+		obj.vec = Vec2f(block.vec.x()*move_flag, block.vec.y()*move_flag);
+
+		return obj;
+	}
 	virtual BLOCK getStatus(){ return status; }
 	virtual CONDITION getCondition(){ return color_type; }
 
@@ -41,5 +49,6 @@ protected:
 	Object block;
 	Texture image_white;
 	Texture image_black;
-
+	bool fall_flag = false;
+	bool move_flag = false;
 };

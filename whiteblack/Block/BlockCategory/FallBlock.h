@@ -16,7 +16,6 @@ public:
 
 private:
 
-	bool fall_flag = false;
 	int fall_count;
 
 };
