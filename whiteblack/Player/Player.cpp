@@ -57,7 +57,7 @@ void Player::setup(Vec2f pos){
 	player.pos = pos;
 	player.size = Vec2f(140, 190);
 
-	speed = Vec2f(0.8, 23);
+	speed = Vec2f(0.8, 21);
 	player.vec = Vec2f(0, 0);
 	g = 1;
 
