@@ -31,8 +31,8 @@ public:
 	virtual BLOCK getStatus(){ return status; }
 	virtual CONDITION getCondition(){ return color_type; }
 
-	virtual bool getFallFlag(){ return fall_flag; }
-	virtual bool getMoveFlag(){ return move_flag; }
+	virtual bool getFallFlag(){ return false; }
+	virtual bool getMoveFlag(){ return false; }
 
 protected:
 
@@ -41,7 +41,5 @@ protected:
 	Object block;
 	Texture image_white;
 	Texture image_black;
-	bool fall_flag = false;
-	bool move_flag = false;
 
 };

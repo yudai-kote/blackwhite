@@ -12,8 +12,11 @@ public:
 	void draw();
 	void setup();
 
+	bool getFallFlag(){ return fall_flag; }
+
 private:
 
+	bool fall_flag = false;
 	int fall_count;
 
 };
