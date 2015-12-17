@@ -6,6 +6,9 @@ SceneManager::SceneManager(){
 }
 
 void SceneManager::update(){
+
+    //std::cout << "scene_number : " << static_cast<int>(scene_number) << std::endl;
+
     switch (scene_number)
     {
     default:
