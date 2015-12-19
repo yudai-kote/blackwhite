@@ -43,7 +43,7 @@ SCENE StageSelect::shift()
     {
         return fade_Out_();
     }
-    return SCENE::GAME;
+    return SCENE::STAGESELECT;
 }
 
 void StageSelect::Setup_map_Comment_()
@@ -237,7 +237,7 @@ SCENE StageSelect::fade_Out_()
             break;
         case YuCounter::END:
             setup();
-            return SCENE::TITLE;
+            return SCENE::GAME;
             break;
         }
     }

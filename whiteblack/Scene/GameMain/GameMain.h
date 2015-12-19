@@ -15,6 +15,10 @@ private:
     Map map;
     Player player;
     
+    Media BGM;
+    Media gameover;
+    Media clear;
+    Texture bg;
 
 };
 

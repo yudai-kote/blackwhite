@@ -37,6 +37,11 @@ public:
 	//引数で獲得して放出します
 	bool released(Vec2i);
 
+    //マップの左下の位置を返す関数
+    Vec2f pos();
+    //マップ全体の大きさを返す関数
+    Vec2f size();
+
 private:
 
 	std::vector<std::vector<BlockBase*>> map_chip;

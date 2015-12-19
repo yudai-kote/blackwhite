@@ -8,7 +8,7 @@ Player::Player(){
 void Player::update(){
     conditionUpdate();
 	move();
-    std::cout << color_abs << std::endl;
+    //std::cout << color_abs << std::endl;
 }
 
 void Player::draw(){
@@ -57,7 +57,7 @@ void Player::setup(Vec2f pos){
     cut_y = 768;
     fream = 12;
 	player.pos = pos;
-	player.size = Vec2f(140, 190);
+	player.size = Vec2f(95, 190);
 
 	speed = Vec2f(0.8, 21);
 	player.vec = Vec2f(0, 0);

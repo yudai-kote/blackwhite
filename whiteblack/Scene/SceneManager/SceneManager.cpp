@@ -50,18 +50,17 @@ void SceneManager::Shift(){
         scene_number = title.shift();
         break;
     case SCENE::STAGESELECT:
-        if (stageselect.shift() != SCENE::STAGESELECT)
-        {
-            std::cout << stageselect.Get_Stage_Number() << std::endl;
-            GameMain.setup(/*stageselect.Get_Stage_Number()*/1);
-        }
         scene_number = stageselect.shift();
 
+        if (scene_number != SCENE::STAGESELECT)
+        {
+            GameMain.setup(stageselect.Get_Stage_Number()+1);
+        }
         break;
     case SCENE::GAME:
         scene_number = GameMain.shift();
 
         break;
     }
-
+            
 }

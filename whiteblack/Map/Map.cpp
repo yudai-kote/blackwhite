@@ -15,6 +15,8 @@ struct P
 
 P p(Vec2f::Zero(), Vec2f::Zero());
 
+
+
 float absmax(float a, float b){
 	if (std::abs(a) > std::abs(b))
 		return a;
@@ -75,6 +77,7 @@ void Map::setup(int stage){
 
 	assert(!map_file->fail());
 
+    map_chip.clear();
 	Vec2i map_size;
 
 	*map_file >> map_size.y();
@@ -112,7 +115,7 @@ void Map::setup(int stage){
 				map_chip_.push_back(new MoveBlock);
 				//map_chip_[x]->setImage(Texture("res/Texture/move_right_white_block.png"));
 				map_chip_[x]->setCondition(CONDITION::WHITE);
-				map_chip_[x]->setVec(Vec2f(-10.0f, 0.0f));
+				map_chip_[x]->setVec(Vec2f(5.0f, 0.0f));
 				map_chip_[x]->setImageBlack(moveblock_right);
 				map_chip_[x]->setImageWhite(moveright_white);
 				break;
@@ -130,8 +133,8 @@ void Map::setup(int stage){
 				map_chip_.push_back(new DoubleBlock);
 				//map_chip_[x]->setImage(Texture("res/Texture/double_white_block.png"));
 				map_chip_[x]->setCondition(CONDITION::WHITE);
-				map_chip_[x]->setImageBlack(doubleblock_black);
-				map_chip_[x]->setImageWhite(doubleblock_white);
+                map_chip_[x]->setImageBlack(doubleblock_white);
+                map_chip_[x]->setImageWhite(doubleblock_black);
 				break;
 
 			case 5:
@@ -146,7 +149,7 @@ void Map::setup(int stage){
 				map_chip_.push_back(new MoveBlock);
 				//map_chip_[x]->setImage(Texture("res/Texture/move_right_black_block.png"));
 				map_chip_[x]->setCondition(CONDITION::BLACK);
-				map_chip_[x]->setVec(Vec2f(10.0f, 0.0f));
+				map_chip_[x]->setVec(Vec2f(5.0f, 0.0f));
 				map_chip_[x]->setImageBlack(moveblock_right);
 				map_chip_[x]->setImageWhite(moveright_white);
 				break;
@@ -155,7 +158,7 @@ void Map::setup(int stage){
 				map_chip_.push_back(new FallBlock);
 				//map_chip_[x]->setImage(Texture("res/Texture/fall_black_block.png"));
 				map_chip_[x]->setCondition(CONDITION::BLACK);
-				map_chip_[x]->setVec(Vec2f(0.0f, -10.0f));
+				map_chip_[x]->setVec(Vec2f(0.0f, -5.0f));
 				map_chip_[x]->setImageBlack(downblock_black);
 				map_chip_[x]->setImageWhite(downblock_white);
 				break;
@@ -164,8 +167,8 @@ void Map::setup(int stage){
 				map_chip_.push_back(new DoubleBlock);
 				//map_chip_[x]->setImage(Texture("res/Texture/double_black_block.png"));
 				map_chip_[x]->setCondition(CONDITION::BLACK);
-				map_chip_[x]->setImageBlack(doubleblock_black);
-				map_chip_[x]->setImageWhite(doubleblock_white);
+                map_chip_[x]->setImageBlack(doubleblock_white);
+                map_chip_[x]->setImageWhite(doubleblock_black);
 				break;
 
 			case 9:
@@ -188,7 +191,7 @@ void Map::setup(int stage){
 				map_chip_.push_back(new MoveBlock);
 				//map_chip_[x]->setImage(Texture("res/Texture/move_down_white_block.png"));
 				map_chip_[x]->setCondition(CONDITION::WHITE);
-				map_chip_[x]->setVec(Vec2f(0.0f, -10.0f));
+				map_chip_[x]->setVec(Vec2f(0.0f, -5.0f));
 				map_chip_[x]->setImageBlack(moveblock_down);
 				map_chip_[x]->setImageWhite(movedown_white);
 				break;
@@ -197,7 +200,7 @@ void Map::setup(int stage){
 				map_chip_.push_back(new MoveBlock);
 				//map_chip_[x]->setImage(Texture("res/Texture/move_left_white_block.png"));
 				map_chip_[x]->setCondition(CONDITION::WHITE);
-				map_chip_[x]->setVec(Vec2f(10.0f, 0.0f));
+				map_chip_[x]->setVec(Vec2f(-5.0f, 0.0f));
 				map_chip_[x]->setImageBlack(moveblock_left);
 				map_chip_[x]->setImageWhite(moveleft_white);
 				break;
@@ -206,7 +209,7 @@ void Map::setup(int stage){
 				map_chip_.push_back(new MoveBlock);
 				//map_chip_[x]->setImage(Texture("res/Texture/move_up_white_block.png"));
 				map_chip_[x]->setCondition(CONDITION::WHITE);
-				map_chip_[x]->setVec(Vec2f(0.0f, 10.0f));
+				map_chip_[x]->setVec(Vec2f(0.0f, 5.0f));
 				map_chip_[x]->setImageBlack(moveblock_up);
 				map_chip_[x]->setImageWhite(moveup_white);
 				break;
@@ -215,7 +218,7 @@ void Map::setup(int stage){
 				map_chip_.push_back(new MoveBlock);
 				//map_chip_[x]->setImage(Texture("res/Texture/move_down_black_block.png"));
 				map_chip_[x]->setCondition(CONDITION::BLACK);
-				map_chip_[x]->setVec(Vec2f(0.0f, -10.0f));
+				map_chip_[x]->setVec(Vec2f(0.0f, -5.0f));
 				map_chip_[x]->setImageBlack(moveblock_down);
 				map_chip_[x]->setImageWhite(movedown_white);
 				break;
@@ -224,7 +227,7 @@ void Map::setup(int stage){
 				map_chip_.push_back(new MoveBlock);
 				//map_chip_[x]->setImage(Texture("res/Texture/move_left_black_block.png"));
 				map_chip_[x]->setCondition(CONDITION::BLACK);
-				map_chip_[x]->setVec(Vec2f(-10.0f, 0.0f));
+				map_chip_[x]->setVec(Vec2f(-5.0f, 0.0f));
 				map_chip_[x]->setImageBlack(moveblock_left);
 				map_chip_[x]->setImageWhite(moveleft_white);
 				break;
@@ -233,9 +236,9 @@ void Map::setup(int stage){
 				map_chip_.push_back(new MoveBlock);
 				//map_chip_[x]->setImage(Texture("res/Texture/move_up_black_block.png"));
 				map_chip_[x]->setCondition(CONDITION::BLACK);
-				map_chip_[x]->setVec(Vec2f(0.0f, 10.0f));
+				map_chip_[x]->setVec(Vec2f(0.0f, 5.0f));
 				map_chip_[x]->setImageBlack(moveblock_up);
-				map_chip_[x]->setImageWhite(moveblock_down);
+                map_chip_[x]->setImageWhite(moveup_white);
 				break;
 			}
 
@@ -276,9 +279,12 @@ Vec2f Map::isHitPlayerToBlock(Object player, CONDITION player_condition){
 					map_chip[y][x]->getCondition() == CONDITION::BLACK){
 					a = collsion(player, map_chip[y][x]->getObject(),
 						//上のブロックに当たり判定がなかったらの条件式
-						map_chip[y - (1 * y != 0)][x]->getCondition() != CONDITION::WHITE,
-						//下のブロックの当たり判定がなかったらの条件式
-						map_chip[y + (1 * y != (map_chip.size() - 1))][x]->getCondition() != CONDITION::WHITE);
+						/*map_chip[y - (1 * y != 0)][x]->getCondition() != CONDITION::WHITE*/
+                        !(map_chip[y - (1 * y != 0)][x]->getCondition() == CONDITION::STRIPE ||
+                        map_chip[y - (1 * y != 0)][x]->getCondition() == CONDITION::BLACK),
+						//下のブロックの当たり判定がなかったらの条件式                        
+                        !(map_chip[y + (1 * y != (map_chip.size() - 1))][x]->getCondition() == CONDITION::STRIPE ||
+                        map_chip[y + (1 * y != (map_chip.size() - 1))][x]->getCondition() == CONDITION::BLACK));
 					if (a.y()  > 0)
 						map_chip[y][x]->setFallFlag(1);
 
@@ -301,9 +307,13 @@ Vec2f Map::isHitPlayerToBlock(Object player, CONDITION player_condition){
 					map_chip[y][x]->getCondition() == CONDITION::WHITE){
 					a = collsion(player, map_chip[y][x]->getObject(),
 						//上のブロックに当たり判定がなかったらの条件式
-						map_chip[y - (1 * y != 0)][x]->getCondition() != CONDITION::BLACK,
+						//map_chip[y - (1 * y != 0)][x]->getCondition() != CONDITION::BLACK 
+                        !(map_chip[y - (1 * y != 0)][x]->getCondition() == CONDITION::STRIPE ||
+                        map_chip[y - (1 * y != 0)][x]->getCondition() == CONDITION::WHITE)
+                        ,
 						//下のブロックの当たり判定がなかったらの条件式
-						map_chip[y + (1 * y != (map_chip.size() - 1))][x]->getCondition() != CONDITION::BLACK);
+                        !(map_chip[y + (1 * y != (map_chip.size() - 1))][x]->getCondition() == CONDITION::STRIPE ||
+                        map_chip[y + (1 * y != (map_chip.size() - 1))][x]->getCondition() == CONDITION::WHITE));
 					if (a.y()  > 0){
 						map_chip[y][x]->setFallFlag(1);
 						//a += map_chip[y][x]->getVectol() * map_chip[y][x]->getFallFlag()*map_chip[y][x]->getMoveFlag();
@@ -522,18 +532,31 @@ Vec2f Map::collsion(Object player, Object block, bool up, bool down){
 			}
 		}
 		//左
-		if (player.vec.x() > 0){
+		//if (player.vec.x() > 0){
+            if (player.pos.x() < block.pos.x()+block.size.x()/2)
 			// if (player.pos.x() > block.pos.x()
 			return Vec2f((block.pos.x() - player.size.x()) - player.pos.x(), 0);
-		}
+		//}
 
 		//右
-		if (player.vec.x() < 0){
-			return Vec2f((block.pos.x() + block.size.x()) - player.pos.x(), 0);
-		}
+		//if (player.vec.x() < 0){
+            if (player.pos.x() > block.pos.x() + block.size.x() / 2)
+
+            return Vec2f((block.pos.x() + block.size.x()) - player.pos.x(), 0);
+		//}
 
 	}
 
 	return Vec2f(0, 0);
 
+}
+
+
+Vec2f Map::pos(){
+    return Vec2f(0, map_chip.size() * static_cast<float>(BLOCKSIZE::HEIGHT));
+}
+
+Vec2f Map::size(){
+
+    return Vec2f(map_chip[0].size() * static_cast<float>(BLOCKSIZE::WIDTH), map_chip.size() * static_cast<float>(BLOCKSIZE::HEIGHT));
 }
