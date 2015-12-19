@@ -36,8 +36,8 @@ void GameMain::draw(){
     player.draw();
 }
 
-void GameMain::setup(){
-    map.setup(1);
+void GameMain::setup(int stage_num){
+    map.setup(stage_num);
 
 
     player.setup(map.getPlayerStartPos());

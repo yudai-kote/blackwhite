@@ -8,7 +8,7 @@ class GameMain
 public:
     void update();
     void draw();
-    void setup();
+    void setup(int);
     SCENE shift();
     GameMain();
 private:
