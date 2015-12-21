@@ -1,11 +1,13 @@
 #include "SceneManager.h"
 
 SceneManager::SceneManager(){
-    scene_number = SCENE::GAME;
-    GameMain.setup();
+    scene_number = SCENE::TITLE;
+   
 }
 
 void SceneManager::update(){
+
+    
     switch (scene_number)
     {
     default:
@@ -14,6 +16,7 @@ void SceneManager::update(){
         title.update();
         break;
     case SCENE::STAGESELECT:
+        stageselect.update();
         break;
     case SCENE::GAME:
         GameMain.update();
@@ -29,6 +32,7 @@ void SceneManager::draw(){
         title.draw();
         break;
     case SCENE::STAGESELECT:
+        stageselect.draw();
         break;
     case SCENE::GAME:
         GameMain.draw();
@@ -48,11 +52,15 @@ void SceneManager::Shift(){
     case SCENE::STAGESELECT:
         scene_number = stageselect.shift();
 
+        if (scene_number != SCENE::STAGESELECT)
+        {
+            GameMain.setup(stageselect.Get_Stage_Number()+1);
+        }
         break;
     case SCENE::GAME:
         scene_number = GameMain.shift();
 
         break;
     }
-
+            
 }

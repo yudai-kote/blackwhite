@@ -37,13 +37,38 @@ public:
 	//引数で獲得して放出します
 	bool released(Vec2i);
 
+    //マップの左下の位置を返す関数
+    Vec2f pos();
+    //マップ全体の大きさを返す関数
+    Vec2f size();
+
 private:
 
 	std::vector<std::vector<BlockBase*>> map_chip;
 	Vec2f player_start_pos;
 
 	void mapDelete();
+
+    Vec2f collsion(Object player, Object block, bool, bool);
+
     
+    Texture blackblock;
+    Texture whiteblock;
+    Texture stripeblock;
+    Texture doubleblock_white;
+    Texture doubleblock_black;
+    Texture downblock_black;
+    Texture downblock_white;
+    
+    Texture moveblock_up;
+    Texture moveblock_down;
+    Texture moveblock_left;
+    Texture moveblock_right;
+    Texture movedown_white;
+    Texture moveleft_white;
+    Texture moveright_white;
+    Texture moveup_white;
+
 };
 
 

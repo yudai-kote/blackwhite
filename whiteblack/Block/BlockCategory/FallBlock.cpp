@@ -33,13 +33,17 @@ void FallBlock::update()
 		block.pos.y() += block.vec.y();
 	}
 
-	if (block.pos.y() <= (-WINDOW::HEIGHT / 2) - block.size.y() * 5)
+	/*if (block.pos.y() <= (env.viewSize.y() / 2) - block.size.y() * 5)
 	{
 		fall_flag = false;
-	}
+	}*/
 }
 
 void FallBlock::draw()
 {
-	drawFillBox(block.pos.x(), block.pos.y(), block.size.x(), block.size.y(), Color::yellow);
+	if (color_type == CONDITION::WHITE)
+		drawTextureBox(block.pos.x(), block.pos.y(), block.size.x(), block.size.y(), 0, 0, 32, 32, image_white);
+
+	if (color_type == CONDITION::BLACK)
+		drawTextureBox(block.pos.x(), block.pos.y(), block.size.x(), block.size.y(), 0, 0, 32, 32, image_black);
 }
