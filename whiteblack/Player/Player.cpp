@@ -6,8 +6,9 @@ Player::Player(){
 }
 
 void Player::update(){
+    conditionUpdate();
 	move();
-
+    //std::cout << color_abs << std::endl;
 }
 
 void Player::draw(){
@@ -20,7 +21,7 @@ void Player::draw(){
 			player.size.x(),
 			player.size.y(),
 			0 + cut_x,
-			0,
+			0 + cut_y,
 			256,
 			256,
 			player_texture,
@@ -37,7 +38,7 @@ void Player::draw(){
 			player.size.x(),
 			player.size.y(),
 			0 + cut_x,
-			0,
+			0 + cut_y,
 			256,
 			256,
 			player_texture,
@@ -53,11 +54,12 @@ void Player::draw(){
 
 void Player::setup(Vec2f pos){
 	player_texture = Texture("res/Texture/chara.png");
-
+    cut_y = 768;
+    fream = 12;
 	player.pos = pos;
-	player.size = Vec2f(140, 190);
+	player.size = Vec2f(95, 190);
 
-	speed = Vec2f(0.8, 23);
+	speed = Vec2f(0.8, 21);
 	player.vec = Vec2f(0, 0);
 	g = 1;
 
@@ -70,8 +72,30 @@ void Player::setup(Vec2f pos){
 	jump_flag = false;
 }
 
-void Player::move(){
+void Player::conditionUpdate(){
 	cut_x = 256;
+	switch (color_abs)
+	{
+	case 0:
+        cut_y = 768;
+		fream = 9;
+		break;
+	case 1:
+        cut_y = 512;
+		fream = 6;
+		break;
+	case 2:
+        cut_y = 256;
+		fream = 3;
+		break;
+	case 3:
+        cut_y = 0;
+		fream = 0;
+		break;
+	}
+}
+
+void Player::move(){
 	dirUpdate(select_dir);
 	//ブロック選択
 	if (select_dir == SELECTDIR::Y ||
@@ -128,7 +152,7 @@ void Player::move(){
 
 
 	player.pos.x() += player.vec.x();
-	std::cout << player.vec.x() << std::endl;
+	
 	if (player.vec.x()*player.vec.x() > 0.01){
 		player.vec.x() *= 0.9;
 	}
@@ -164,7 +188,7 @@ bool Player::suckColor(){
 	return false;
 }
 bool Player::outColor(){
-	if (color_abs >= 0){
+	if (color_abs > 0){
 		if (env.isPushKey('L')){
 			return true;
 		}
@@ -187,8 +211,9 @@ void Player::dirUpdate(SELECTDIR& select_dir){
 
 void Player::animation(){
 	animation_count++;
-	int index = (animation_count / 6) % 3;
-	cut_x = (index)* 256.0f;
+	int index = (animation_count / 6) % 3+fream;
+	cut_x = (index%3) * 256.0f;
+	cut_y = (index/3) * 256.0f;
 }
 
 Object Player::getObject(){
@@ -219,6 +244,9 @@ void Player::addPos(Vec2f add){
 		jump_flag = true;
 		player.vec.y() = 0;
 	}
+    if (add.y() < 0){
+        player.vec.y() = -0.1;
+    }
 	player.pos += add;
 }
 

@@ -27,13 +27,20 @@ public:
 	virtual Vec2f getSize() { return block.size; }
 	virtual Vec2f getVectol() { return block.vec; }
 
-    Object getObject(){ return block; }
-    void setType(int _a){ type_num = _a; }
+    Object getObject(){
+
+		Object obj;
+		obj.pos = block.pos;
+		obj.size = block.size;
+		obj.vec = Vec2f(block.vec.x()*move_flag, block.vec.y()*move_flag);
+
+		return obj;
+	}
 	virtual BLOCK getStatus(){ return status; }
 	virtual CONDITION getCondition(){ return color_type; }
 
-	virtual bool getFallFlag(){ return fall_flag; }
-	virtual bool getMoveFlag(){ return move_flag; }
+	virtual bool getFallFlag(){ return false; }
+	virtual bool getMoveFlag(){ return false; }
 
 protected:
 
@@ -42,8 +49,6 @@ protected:
 	Object block;
 	Texture image_white;
 	Texture image_black;
-	int type_num;
 	bool fall_flag = false;
 	bool move_flag = false;
-
 };
