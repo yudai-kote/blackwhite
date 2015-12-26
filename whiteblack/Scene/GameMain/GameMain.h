@@ -19,6 +19,12 @@ private:
     Media gameover;
     Media clear;
     Texture bg;
+    int count;
+    
+    bool isGoal();
+
+   
+    bool isFieldOut();
 
 };
 

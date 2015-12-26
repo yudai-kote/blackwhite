@@ -20,7 +20,11 @@
 enum class SELECTDIR{
 	Y,
 	X,
+	NON_Y0,
+	NON_Y1,
 	NON
+	
+
 };
 
 

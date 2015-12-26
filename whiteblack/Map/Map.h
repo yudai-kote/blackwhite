@@ -8,6 +8,7 @@
 
 
 
+
 class Map
 {
 public:
@@ -22,6 +23,9 @@ public:
 	//structŒ^‚Ìplayer‚Æplayer‚Ìcondition‚ğˆø”‚Å‚à‚ç‚Á‚Ä
 	//block‚É‚ß‚è‚ñ‚¾•¶‚Ì’l‚ğ({)‚Ì’l‚Å•Ô‚µ‚Ü‚·
 	Vec2f isHitPlayerToBlock(Object, CONDITION);
+
+    Vec2f getGoalPos();
+    Vec2f getGoalSize();
 
 	void isHitMoveBlockToBlock();
 
@@ -46,9 +50,10 @@ private:
 
 	std::vector<std::vector<BlockBase*>> map_chip;
 	Vec2f player_start_pos;
+    Vec2f goal_pos;
+    Vec2f goal_size;
 
 	void mapDelete();
-
     Vec2f collsion(Object player, Object block, bool, bool);
 
     
