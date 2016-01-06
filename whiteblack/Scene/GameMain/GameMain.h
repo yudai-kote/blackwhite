@@ -14,17 +14,31 @@ public:
 private:
     Map map;
     Player player;
-    
+	YuFont font_;
     Media BGM;
     Media gameover;
     Media clear;
+	Media select_SE_;
     Texture bg;
+	Texture mw;
+	Texture retry;
+	Texture home;
+	Texture next;
     int count;
-    
+	int stage_num;
+	int select;
     bool isGoal();
+	
+	int fidcount;
+	
+	bool isFieldOut();
+	SCENE Result();
+	Font font = Font("res/Arimo-Italic.ttf");
 
-   
-    bool isFieldOut();
-
+	
+	enum 
+	{
+		FEDSPEED = 60
+	};
 };
 
