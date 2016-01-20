@@ -39,6 +39,12 @@ public:
 	void conditionUpdate();
 	void dirUpdate(SELECTDIR&);
 	void animation();
+
+	//アップデートしたら揺れながら消える
+	void deadAnimation();
+
+	void clearAnimation();
+
 	SELECTDIR select_dir;
 	//ブロックが吸える状態なら選択ボタンを押せる
 	//そして吸ったかどうかを返す
@@ -58,10 +64,14 @@ public:
 	void subColor();
 private:
 	Texture player_texture;
+	Media jump, sub, add;
 	int ColorMax;
 	int animation_count;
+	int dead_animation_count;
+	int clear_animation_count;
 	float cut_x;
 	float cut_y;
+	float dead_x;
     int fream;
     Object player;
 	Vec2i selection;
