@@ -225,14 +225,14 @@ void Title::draw()
                  tex_,
                  true);
 */
-    font_.textSize(300);
+    font_.textSize(250);
     font_.textColor(Color::white);
     yuFillBox(Vec2f(title_Pos_.x() + 0.0f, title_Pos_.y() + 150.0f - 30.0f),
-              Vec2f(1000, 300.0f),
+              Vec2f(2000, 300.0f),
               true,
               Color(0.0f, 0.0f, 0.0f, 0.5f));
     font_.textAlign(YuFont::CENTER);
-    font_.text("Sirochrome", Vec2f(title_Pos_.x(), title_Pos_.y()));
+    font_.text("SHIROCHROME", Vec2f(title_Pos_.x(), title_Pos_.y()));
 
     font_.textSize(200);
     if (is_Pushed_)
@@ -259,6 +259,8 @@ void Title::draw()
     yuFillBox(Vec2f::Zero(), Vec2f(WIDTH, HEIGHT),
               true,
               col_);
+
+
 }
 void Title::setup()
 {
