@@ -115,6 +115,8 @@ void StageSelect::update()
 }
 void StageSelect::draw()
 {
+	drawTextureBox(WIDTH / -2, HEIGHT / -2, WIDTH, HEIGHT, 200, 0, 1720, 1280, bg);
+
     Draw_map_Button_();
     Draw_miniMap_();
     Draw_Side_Menu_();
@@ -137,6 +139,8 @@ void StageSelect::setup()
     press_Select_Frame_ = (0);
     is_Menu_ = (false);
     is_Exit_ = (false);
+	Operation = Texture("res/Texture/sousasetumei.png");
+	bg = Texture("res/Texture/bg/sutesere.png");
 }
 SCENE StageSelect::shift()
 {
@@ -163,19 +167,19 @@ void StageSelect::Setup_map_Comment_()
 {
     std::vector<std::vector<std::string>> _temp =
     {
-        {
-            { "一番最初だから簡単だよ" },
-            { "改行らくらく" }
-        },
-        {
-            { "ちょっと頭を捻るコースです" }
-        },
-        {
-            { "息抜きコース" },
-            { "改行改行" },
-            { "改行改行" },
-            { "改行いえーい" }
-        }
+        //{
+        //    { "一番最初だから簡単だよ" },
+        //    { "改行らくらく" }
+        //},
+        //{
+        //    { "ちょっと頭を捻るコースです" }
+        //},
+        //{
+        //    { "息抜きコース" },
+        //    { "改行改行" },
+        //    { "改行改行" },
+        //    { "改行いえーい" }
+        //}
     };
 
     for (int i = 0; i < stage_Max_No_; ++i)
@@ -269,7 +273,7 @@ void StageSelect::Draw_miniMap_()
             font_.textSize(32);
             for (size_t i = 0; i < map_Coment_[stage_No_].size(); ++i)
             {
-                font_.text(map_Coment_[stage_No_][i], Vec2f(draw_Map_Size_.x(), -32.0f * (i + 1)));
+                font_.text(map_Coment_[stage_No_][i], Vec2f(draw_Map_Size_.x(), -32.0f * (i + 1)),Color::black);
             }
         }
         else
@@ -282,17 +286,17 @@ void StageSelect::Draw_miniMap_()
             if (stage_No_ == stage_Max_No_ + 0)
             {
                 font_.textSize(64);
-                font_.text("操作説明", Vec2f(draw_Map_Size_.x() - 16.0f, 16.0f));
+                font_.text("操作説明", Vec2f(draw_Map_Size_.x() - 16.0f, 16.0f),Color::black);
                 font_.textSize(32);
-                font_.text("ゲームの操作方法を", Vec2f(draw_Map_Size_.x(), -32.0f * (1)));
-                font_.text("説明します", Vec2f(draw_Map_Size_.x(), -32.0f * (2)));
+                font_.text("ゲームの操作方法を", Vec2f(draw_Map_Size_.x(), -32.0f * (1)),Color::black);
+                font_.text("説明します", Vec2f(draw_Map_Size_.x(), -32.0f * (2)),Color::black);
             }
             if (stage_No_ == stage_Max_No_ + 1)
             {
                 font_.textSize(64);
-                font_.text("ゲーム終了", Vec2f(draw_Map_Size_.x() - 16.0f, 16.0f));
+                font_.text("ゲーム終了", Vec2f(draw_Map_Size_.x() - 16.0f, 16.0f),Color::black);
                 font_.textSize(32);
-                font_.text("またねー", Vec2f(draw_Map_Size_.x(), -32.0f * (1)));
+                font_.text("またねー", Vec2f(draw_Map_Size_.x(), -32.0f * (1)),Color::black);
             }
         }
     }
@@ -429,9 +433,10 @@ void StageSelect::Draw_Side_Menu_()
         yuFillBox(Vec2f::Zero(), Vec2f(WIDTH, HEIGHT),
                   true,
                   Color(0.0f, 0.0f, 0.0f, 0.9f));
-        font_.textSize(64);
-        font_.textAlign(YuFont::CENTER);
-        font_.text("ここに、操作説明が貼られます。");
+        //font_.textSize(64);
+        //font_.textAlign(YuFont::CENTER);
+        //font_.text("ここに、操作説明が貼られます。");
+		drawTextureBox(WIDTH / -2, HEIGHT / -2, WIDTH, HEIGHT, 0, 0, 2048, 1090, Operation);
         font_.textSize(32);
         font_.text("Enterで戻る←", Vec2f(WIDTH / 2 - 150.0f, -HEIGHT / 2.0f + 100.0f));
         font_.textSize(64);
@@ -440,8 +445,8 @@ void StageSelect::Draw_Side_Menu_()
     {
         font_.textAlign(YuFont::CENTER);
         font_.textSize(32);
-        font_.text("Z←→Cで選択", Vec2f(WIDTH / 2 - 150.0f, -HEIGHT / 2.0f + 100.0f));
-        font_.text("Enterでスタート", Vec2f(WIDTH / 2 - 150.0f, -HEIGHT / 2.0f + 100.0f - 32.0f));
+        font_.text("Z←→Cで選択", Vec2f(WIDTH / 2 - 150.0f, -HEIGHT / 2.0f + 100.0f),Color::white);
+        font_.text("Enterでスタート", Vec2f(WIDTH / 2 - 150.0f, -HEIGHT / 2.0f + 100.0f - 32.0f), Color::white);
         font_.textSize(64);
     }
 
@@ -547,31 +552,31 @@ void StageSelect::Update_map_Select_()
         press_Select_Frame_ = 0;
     }
 
-    Vec2f _mouse_Pos = env.mousePosition() + Vec2f(draw_Select_Box_Size_.x() / 2.0f, draw_Select_Box_Size_.y() / 2.0f);
-    if (_mouse_Pos != Vec2f(draw_Select_Box_Size_.x() / 2.0f, draw_Select_Box_Size_.y() / 2.0f))
-    {
-        for (size_t z = 0; z < map_Chip_Data_.size(); ++z)
-        {
-            if (0 <= _mouse_Pos.x() && _mouse_Pos.x() <= draw_Select_Box_Size_.x() &&
-                0 <= _mouse_Pos.y() && _mouse_Pos.y() <= draw_Select_Box_Size_.y())
-            {
-                int _buf_Stage_No = stage_No_;
-                stage_No_ = z;
-                if (_buf_Stage_No != stage_No_)
-                {
-                    select_Frame_ = 0;
-                    select_SE_.play();
-                }
-            }
-            _mouse_Pos.x() += -draw_Select_Box_Size_.x();
-            if (z % 5 == 5 - 1)
-            {
-                _mouse_Pos = env.mousePosition() + Vec2f(draw_Select_Box_Size_.x() / 2.0f, draw_Select_Box_Size_.y() / 2.0f);
-                int _scale = ((z + 1) / 5);
-                _mouse_Pos.y() += draw_Select_Box_Size_.y() * _scale;
-            }
-        }
-    }
+    //Vec2f _mouse_Pos = env.mousePosition() + Vec2f(draw_Select_Box_Size_.x() / 2.0f, draw_Select_Box_Size_.y() / 2.0f);
+    //if (_mouse_Pos != Vec2f(draw_Select_Box_Size_.x() / 2.0f, draw_Select_Box_Size_.y() / 2.0f))
+    //{
+    //    for (size_t z = 0; z < map_Chip_Data_.size(); ++z)
+    //    {
+    //        if (0 <= _mouse_Pos.x() && _mouse_Pos.x() <= draw_Select_Box_Size_.x() &&
+    //            0 <= _mouse_Pos.y() && _mouse_Pos.y() <= draw_Select_Box_Size_.y())
+    //        {
+    //            int _buf_Stage_No = stage_No_;
+    //            stage_No_ = z;
+    //            if (_buf_Stage_No != stage_No_)
+    //            {
+    //                select_Frame_ = 0;
+    //                select_SE_.play();
+    //            }
+    //        }
+    //        _mouse_Pos.x() += -draw_Select_Box_Size_.x();
+    //        if (z % 5 == 5 - 1)
+    //        {
+    //            _mouse_Pos = env.mousePosition() + Vec2f(draw_Select_Box_Size_.x() / 2.0f, draw_Select_Box_Size_.y() / 2.0f);
+    //            int _scale = ((z + 1) / 5);
+    //            _mouse_Pos.y() += draw_Select_Box_Size_.y() * _scale;
+    //        }
+    //    }
+    //}
 
     if (stage_No_ < 0)
     {

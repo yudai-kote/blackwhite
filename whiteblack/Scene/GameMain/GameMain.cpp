@@ -12,11 +12,14 @@ float EasingelasticOut(float t, float b, float e) {
 }
 
 
-GameMain::GameMain(): font_(YuFont("src/whiteblack/Top/yumayoLib/meiryo.ttc")){
+GameMain::GameMain(): 
+font_("src/whiteblack/Top/yumayoLib/meiryo.ttc"){
 	//setup();
 	BGM = Media("res/sound/stage1.wav");
 	gameover = Media("res/sound/gameover.wav");
 	clear = Media("res/sound/clear.wav");
+	sub_SE = Media("res/sound/housyutu.wav");
+		add_SE = Media("res/sound/kyusyu.wav");
 	bg = Texture("res/Texture/bg/orora.png");
 	mw = Texture("res/Texture/mw.png");
 	retry = Texture("res/Texture/retry.png");
@@ -34,16 +37,18 @@ void GameMain::update() {
 		player.update();
 		map.update();
 		player.addPos(map.isHitPlayerToBlock(player.getObject(), player.getCondition()));
-		//std::cout << (int)player.getCondition() << std::endl;
+		std::cout << (int)player.getCondition() << std::endl;
 		//•úo
 		if (player.outColor()) {
 			if (map.sucked(player.getSelect())) {
+				sub_SE.play();
 				player.subColor();
 			}
 		}
 		//‹zŽû
 		if (player.suckColor()) {
 			if (map.released(player.getSelect())) {
+				add_SE.play();
 				player.addColor();
 			}
 		}
@@ -70,7 +75,8 @@ void GameMain::draw() {
 	map.draw();
 	map.selected(player.getSelect());
 	glPopMatrix();
-	font.draw(" STAGE" + std::to_string(stage_num), Vec2f(WIDTH / -2, HEIGHT / 2 - font.drawSize("S").y()), Color::lime);
+	font_.textSize(32);
+	font_.text(" STAGE   " + std::to_string(stage_num), Vec2f(WIDTH / -2, HEIGHT / 2 - font.drawSize("S").y()));
 	player.draw();
 	font_.textSize(32);
 	font_.text("Enter‚Å–ß‚é©", Vec2f(WIDTH / 2 - 250.0f, -HEIGHT / 2.0f + 100.0f - 32.0f));
@@ -98,6 +104,7 @@ SCENE GameMain::shift() {
 	if (isGoal()) {
 		BGM.stop();
 		if (count++ < 60 * 3) {
+			player.clearAnimation();
 			fidcount = 0;
 			if (!clear.isPlaying())clear.play();
 		}
@@ -114,6 +121,7 @@ SCENE GameMain::shift() {
 		if (count++ < 60 * 3)
 		{
 			fidcount = 0;
+			player.deadAnimation();
 			if (!gameover.isPlaying())gameover.play();
 		}
 		else

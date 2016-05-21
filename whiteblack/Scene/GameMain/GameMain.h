@@ -19,6 +19,8 @@ private:
     Media gameover;
     Media clear;
 	Media select_SE_;
+	Media sub_SE;
+	Media add_SE;
     Texture bg;
 	Texture mw;
 	Texture retry;

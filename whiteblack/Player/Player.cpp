@@ -1,7 +1,7 @@
 #include "Player.h"
 
 
-Player::Player(){
+Player::Player() : add("res/sound/add.wav"),sub("res/sound/sub.wav"),jump("res/sound/jumpSE.wav"){
 
 }
 
@@ -16,7 +16,7 @@ void Player::draw(){
 	if (direction == DIRECTION::LEFT){
 
 		drawTextureBox(
-			0 + player.size.x() / 2,
+			0 + player.size.x() / 2 + dead_x,
 			0,
 			player.size.x(),
 			player.size.y(),
@@ -25,7 +25,7 @@ void Player::draw(){
 			256,
 			256,
 			player_texture,
-			Color::white,
+			color256(255,255,255,255-dead_animation_count-clear_animation_count),
 			0, Vec2f(-1, 1),
 			Vec2f(player.size.x() / 2, 0)
 			);
@@ -33,7 +33,7 @@ void Player::draw(){
 	if (direction == DIRECTION::RIGHT){
 
 		drawTextureBox(
-			0 + player.size.x() / 2,
+			0 + player.size.x() / 2 + dead_x,
 			0,
 			player.size.x(),
 			player.size.y(),
@@ -42,7 +42,7 @@ void Player::draw(){
 			256,
 			256,
 			player_texture,
-			Color::white,
+			color256(255, 255, 255, 255 - dead_animation_count - clear_animation_count),
 			0, Vec2f(1, 1),
 			Vec2f(player.size.x() / 2, 0)
 			);
@@ -69,6 +69,9 @@ void Player::setup(Vec2f pos){
 	ColorMax = 3;
 	color_abs = 0;
 	animation_count = 0;
+	dead_animation_count = 0;
+	clear_animation_count = 0;
+	dead_x = 0;
 	jump_flag = false;
 }
 
@@ -115,7 +118,7 @@ void Player::move(){
 
 
 	}
-	//std::cout << static_cast<int>(select_dir) << std::endl;
+	
 	if (select_dir == SELECTDIR::NON){
 		if (env.isPressKey('S') &&
 			(env.isPushKey('D') ||
@@ -229,6 +232,7 @@ void Player::move(){
 	if (player.vec.y() > -3){
 		if (jump_flag == true){
 			if (env.isPushKey('K')){
+				jump.play();
 				player.vec.y() = speed.y();
 				jump_flag = false;
 			}
@@ -247,6 +251,7 @@ void Player::move(){
 bool Player::suckColor(){
 	if (color_abs < 3){
 		if (env.isPushKey('J')){
+			sub.play();
 			return true;
 		}
 	}
@@ -255,6 +260,7 @@ bool Player::suckColor(){
 bool Player::outColor(){
 	if (color_abs > 0){
 		if (env.isPushKey('L')){
+			add.play();
 			return true;
 		}
 	}
@@ -292,12 +298,23 @@ void Player::animation(){
 	cut_y = (index / 3) * 256.0f;
 }
 
+void Player::clearAnimation(){
+	clear_animation_count +=2;	
+}
+
+void Player::deadAnimation(){
+	dead_animation_count+=2;
+	dead_x += 10 * sin(dead_animation_count);
+	if (dead_animation_count >= 20){
+
+	}
+}
+
 Object Player::getObject(){
 	return player;
 }
 
 Vec2i Player::getSelect(){
-	std::cout << selection.y() << std::endl;
 	return player_pos() + selection;
 }
 CONDITION Player::getCondition(){

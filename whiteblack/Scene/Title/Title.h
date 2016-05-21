@@ -25,6 +25,7 @@ private:    //  コンストラクタにしか書きません。
     YuFont font_;
 private:    //  setup()で何回も呼ばれます。
     Texture tex_;
+	Texture title_bg;
     Color col_;
     bool is_Fade_;
     bool is_Pushed_;
@@ -39,4 +40,5 @@ private:    //  setup()にもコンストラクタにも書かれません。
 private:
     void fade_In_();
     SCENE fade_Out_();
+
 };
