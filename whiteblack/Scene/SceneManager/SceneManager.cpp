@@ -56,6 +56,8 @@ void SceneManager::Shift(){
         {
             GameMain.setup(stageselect.Get_Stage_Number()+1);
         }
+        if(env.isPushKey(GLFW_KEY_LEFT_CONTROL)) scene_number = SCENE::TITLE;
+
         break;
     case SCENE::GAME:
         scene_number = GameMain.shift();

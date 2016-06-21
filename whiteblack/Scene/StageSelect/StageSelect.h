@@ -123,5 +123,7 @@ private:
     void fade_In_();
     SCENE fade_Out_();
     void game_Exit_();
+	Texture Operation;
+	Texture bg;
 };
 

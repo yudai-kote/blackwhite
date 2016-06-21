@@ -220,18 +220,19 @@ void Title::update()
 }
 void Title::draw()
 {
-    yuTextureBox(Vec2f::Zero(),
+	drawTextureBox(WIDTH / -2, HEIGHT / -2, WIDTH, HEIGHT, 0, 0, 2048, 1395, title_bg);
+   /* yuTextureBox(Vec2f::Zero(),
                  tex_,
                  true);
-
-    font_.textSize(300);
+*/
+    font_.textSize(250);
     font_.textColor(Color::white);
     yuFillBox(Vec2f(title_Pos_.x() + 0.0f, title_Pos_.y() + 150.0f - 30.0f),
-              Vec2f(1000, 300.0f),
+              Vec2f(2000, 300.0f),
               true,
               Color(0.0f, 0.0f, 0.0f, 0.5f));
     font_.textAlign(YuFont::CENTER);
-    font_.text("TITLE", Vec2f(title_Pos_.x(), title_Pos_.y()));
+    font_.text("SHIROCHROME", Vec2f(title_Pos_.x(), title_Pos_.y()));
 
     font_.textSize(200);
     if (is_Pushed_)
@@ -258,9 +259,12 @@ void Title::draw()
     yuFillBox(Vec2f::Zero(), Vec2f(WIDTH, HEIGHT),
               true,
               col_);
+
+
 }
 void Title::setup()
 {
+	title_bg = Texture("res/Texture/bg/titl.png");
     tex_ = (Texture("res/Texture/chara.png"));
     col_ = (Color(0.0f, 0.0f, 0.0f, 1.0f));
     is_Fade_ = (true);
@@ -277,7 +281,7 @@ SCENE Title::shift()
         ;
     else
     {
-        if (env.isPushKey(GLFW_KEY_ENTER))
+        if (Pad::Get().isketteikey())
         {
             is_Pushed_ = true;
         }
